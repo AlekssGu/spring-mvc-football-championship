@@ -33,5 +33,5 @@ Kods un uzdevums ir [pieejams visiem][football] interesentiem.
 Ja jums interesē izveidot savu uzdevuma risinājumu, pievienoju arī uzdevuma [nosacījumus][doc] un [čempionāta datus][data].
 
    [football]: <https://github.com/AlekssGu/spring-mvc-football-championship>
-   [doc]: <https://github.com/AlekssGu/spring-mvc-football-championship/uzdevums.pdf>
-   [data]: <https://github.com/AlekssGu/spring-mvc-football-championship/dati.zip>
+   [doc]: <https://github.com/AlekssGu/spring-mvc-football-championship/blob/master/uzdevums.pdf>
+   [data]: <https://github.com/AlekssGu/spring-mvc-football-championship/blob/master/dati.zip>
