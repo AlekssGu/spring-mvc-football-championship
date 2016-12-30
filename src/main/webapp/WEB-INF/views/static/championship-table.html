@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="lv" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/fragments/head :: head"></head>
+<body>
+    <nav th:replace="templates/fragments/navbar :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Nr.p.k.</th>
+                        <th>Komandas nosaukums</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Zilie vaļi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="templates/fragments/footer :: footer"></footer>
+</body>
+</html>
