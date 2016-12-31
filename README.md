@@ -2,7 +2,7 @@
 
 [![Spring MVC](http://www.javapointer.com/wp-content/uploads/2016/05/spring.png?fit=225%2C150)](https://spring.io)
 
-"Lielā Futbola Līga" ir Latvijas Universitātes Datorikas fakultātē uzdots 2. praktiskais darbs kursā "Modernās programmēšanas tehnoloģijas" (kursa vadītājs - Edgars Celms).
+"Lielā Futbola Līga" ir Latvijas Universitātes Datorikas fakultātē uzdots 2. praktiskais darbs kursā "Modernās programmēšanas tehnoloģijas" (kursa pasniedzējs - Edgars Celms).
 
 Praktiskā darba izveidei izvēlējos "Java Spring MVC" tehnoloģiju, jo nekad iepriekš nebiju darbojies ne ar Java, ne ar Spring MVC. Lai paplašinātu savas zināšanas, tika izvēlēta tieši šī tehnoloģija.
 

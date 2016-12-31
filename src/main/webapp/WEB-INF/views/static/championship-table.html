@@ -4,6 +4,13 @@
 <body>
     <nav th:replace="templates/fragments/navbar :: navbar"></nav>
     <div class="container-fluid">
+
+        <div th:if="${successMsg}" class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div th:replace="templates/fragments/alert :: alert (type='success', message=${successMsg})">...</div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="table-responsive">
                 <table class="table table-striped">
