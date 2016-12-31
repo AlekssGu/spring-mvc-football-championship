@@ -15,15 +15,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources/c31ff505-3dbf-4b9a-907d-d2812117570b.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources/c31ff505-3dbf-4b9a-907d-d2812117570b/storage.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_football_champ_db.sql" afterPath="$PROJECT_DIR$/create_football_champ_db.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/PlayersOnFieldDAO.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/PlayersOnFieldDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/PlayersOnFieldDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/PlayersOnFieldDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dto/GameChangesDTO.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dto/GameChangesDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dto/GamePenaltiesDTO.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dto/GamePenaltiesDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GameChangesEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GameChangesEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GamePenaltiesEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GamePenaltiesEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="SpringMVC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,7 +56,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChampionshipDataParser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChampionshipDataParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
@@ -80,6 +72,19 @@
                 <element signature="method#saveRefereeData#0;class#ChampionshipDataParser#0" expanded="false" />
                 <element signature="method#saveTeamData#0;class#ChampionshipDataParser#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="238">
+                <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -132,21 +137,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1483181129524" expanded="true" signature="868:915" ph="SELECT nextv... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameChangesEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GameChangesEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="40" column="27" lean-forward="false" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
-              <folding>
-                <element signature="e#913#914#0" expanded="true" />
-                <element signature="e#942#943#0" expanded="true" />
-                <element signature="e#983#984#0" expanded="true" />
-                <element signature="e#1019#1020#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -256,7 +246,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/color-list.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/colors/color-edit.html" />
         <option value="$PROJECT_DIR$/src/main/java/lv/autentica/kursi/controller/ColorListController.java" />
         <option value="$PROJECT_DIR$/src/main/java/lv/autentica/kursi/dao/ColorListDAO.java" />
@@ -307,6 +296,7 @@
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GamePenaltiesDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GamePenaltiesDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -617,40 +607,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="ag12098" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="football_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="football_v2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lv" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ag12098" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ChampionshipDataParser" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ClassTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1385,12 +1341,12 @@
       <workItem from="1483135549085" duration="15000" />
       <workItem from="1483135570110" duration="50000" />
       <workItem from="1483135637909" duration="145000" />
-      <workItem from="1483135803948" duration="22309000" />
+      <workItem from="1483135803948" duration="22652000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139519000" />
+    <option name="totallyTimeSpent" value="139862000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1468,13 +1424,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GameRefereesEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="61" lean-forward="false" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GoalAssistsEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1966,6 +1915,17 @@
             <element signature="method#saveRefereeData#0;class#ChampionshipDataParser#0" expanded="false" />
             <element signature="method#saveTeamData#0;class#ChampionshipDataParser#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="238">
+            <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

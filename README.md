@@ -27,11 +27,12 @@ Lai palaistu projektu, nepieciešams uzstādīt PostgreSQL
 4. Atvērt projektu Intellij IDEA (File->Open)
 5. Failā `applicationContext.xml` nomainīt datubāzes paroli uz jūsu Postgres lietotāja paroli
 6. Palaist projektu (`Run jetty:run`)
-7. Pārlūkprogrammā atvērt http://localhost:8080
+7. Pārlūkprogrammā atvērt [http://localhost:8080][localhost]
 
 Kods un uzdevums ir [pieejams visiem][football] interesentiem.
 Ja jums interesē izveidot savu uzdevuma risinājumu, pievienoju arī uzdevuma [nosacījumus][doc] un [čempionāta datus][data].
 
+   [localhost]: <http://localhost:8080> 
    [football]: <https://github.com/AlekssGu/spring-mvc-football-championship>
    [doc]: <https://github.com/AlekssGu/spring-mvc-football-championship/blob/master/uzdevums.pdf>
    [data]: <https://github.com/AlekssGu/spring-mvc-football-championship/blob/master/dati.zip>
