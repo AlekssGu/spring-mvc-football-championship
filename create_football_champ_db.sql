@@ -66,6 +66,14 @@ CREATE TABLE game_changes (
 CREATE TABLE team (
   	id Integer NOT NULL DEFAULT nextval('team_seq'),
   	team_name varchar(50) NOT NULL, 
+    game_count Integer DEFAULT 0,
+    games_won Integer DEFAULT 0,
+    games_lost Integer DEFAULT 0,
+    games_tied Integer DEFAULT 0,
+    goals_scored Integer DEFAULT 0,
+    goals_lost Integer DEFAULT 0,
+    goals_relation Integer DEFAULT 0,
+    total_points Integer DEFAULT 0,
     PRIMARY KEY (id)
 );    
 

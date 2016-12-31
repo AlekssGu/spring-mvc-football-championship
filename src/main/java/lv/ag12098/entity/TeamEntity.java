@@ -10,6 +10,15 @@ import javax.persistence.*;
 public class TeamEntity {
     private int id;
     private String teamName;
+    // statistics data:
+    private int gameCount;
+    private int gamesLost;
+    private int gamesWon;
+    private int gamesTied;
+    private int goalsScored;
+    private int goalsLost;
+    private int goalsRelation;
+    private int totalPoints;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,23 +41,83 @@ public class TeamEntity {
         this.teamName = teamName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TeamEntity that = (TeamEntity) o;
-
-        if (id != that.id) return false;
-        if (teamName != null ? !teamName.equals(that.teamName) : that.teamName != null) return false;
-
-        return true;
+    @Basic
+    @Column(name = "game_count")
+    public int getGameCount() {
+        return gameCount;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (teamName != null ? teamName.hashCode() : 0);
-        return result;
+    public void setGameCount(int gameCount) {
+        this.gameCount = gameCount;
+    }
+
+    @Basic
+    @Column(name = "games_lost")
+    public int getGamesLost() {
+        return gamesLost;
+    }
+
+    public void setGamesLost(int gamesLost) {
+        this.gamesLost = gamesLost;
+    }
+
+    @Basic
+    @Column(name = "games_won")
+    public int getGamesWon() {
+        return gamesWon;
+    }
+
+    public void setGamesWon(int gamesWon) {
+        this.gamesWon = gamesWon;
+    }
+
+    @Basic
+    @Column(name = "games_tied")
+    public int getGamesTied() {
+        return gamesTied;
+    }
+
+    public void setGamesTied(int gamesTied) {
+        this.gamesTied = gamesTied;
+    }
+
+    @Basic
+    @Column(name = "goals_scored")
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
+    }
+
+    @Basic
+    @Column(name = "goals_lost")
+    public int getGoalsLost() {
+        return goalsLost;
+    }
+
+    public void setGoalsLost(int goalsLost) {
+        this.goalsLost = goalsLost;
+    }
+
+    @Basic
+    @Column(name = "goals_relation")
+    public int getGoalsRelation() {
+        return goalsRelation;
+    }
+
+    public void setGoalsRelation(int goalsRelation) {
+        this.goalsRelation = goalsRelation;
+    }
+
+    @Basic
+    @Column(name = "total_points")
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 }
