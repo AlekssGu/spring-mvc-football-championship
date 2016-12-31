@@ -9,6 +9,8 @@ public class GameDTO {
     private Date gameDate;
     private int attendees;
     private String place;
+    private Integer gameRound;
+    private Integer gameSeq;
 
     GameDTO(){
 
@@ -46,11 +48,28 @@ public class GameDTO {
         this.place = place;
     }
 
-    //konstruktors saņem entity objektu un uzseto DTO laukus
-    public GameDTO(GameEntity entity){
-        id = entity.getId();
-        gameDate = entity.getGameDate();
-        attendees = entity.getAttendees();
-        place = entity.getPlace();
+    public Integer getGameRound() {
+        return gameRound;
+    }
+
+    public void setGameRound(Integer gameRound) {
+        this.gameRound = gameRound;
+    }
+
+    public Integer getGameSeq() {
+        return gameSeq;
+    }
+
+    public void setGameSeq(Integer gameSeq) {
+        this.gameSeq = gameSeq;
+    }
+
+    public GameDTO(int id, Date gameDate, int attendees, String place, Integer gameRound, Integer gameSeq) {
+        this.id = id;
+        this.gameDate = gameDate;
+        this.attendees = attendees;
+        this.place = place;
+        this.gameRound = gameRound;
+        this.gameSeq = gameSeq;
     }
 }

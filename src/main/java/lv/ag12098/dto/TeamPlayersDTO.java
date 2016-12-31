@@ -12,6 +12,7 @@ public class TeamPlayersDTO {
     private String position;
     private String name;
     private String surname;
+    private int playerNumber;
 
     public int getId() {
         return id;
@@ -53,11 +54,20 @@ public class TeamPlayersDTO {
         this.surname = surname;
     }
 
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
     public TeamPlayersDTO(TeamPlayersEntity entity) {
         this.id = entity.getId();
         this.teamId = entity.getTeamId();
         this.position = entity.getPosition();
         this.name = entity.getName();
         this.surname = entity.getSurname();
+        this.playerNumber = entity.getPlayerNumber();
     }
 }

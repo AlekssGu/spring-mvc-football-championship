@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class PlayersOnFieldEntity {
     private int id;
     private int gameId;
+    private int teamId;
     private int playerId;
     private Timestamp timeOn;
     private Timestamp timeOff;
@@ -34,6 +35,16 @@ public class PlayersOnFieldEntity {
 
     public void setGameId(int gameId) {
         this.gameId = gameId;
+    }
+
+    @Basic
+    @Column(name = "team_id")
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     @Basic
@@ -75,17 +86,17 @@ public class PlayersOnFieldEntity {
 
         if (id != that.id) return false;
         if (gameId != that.gameId) return false;
+        if (teamId != that.teamId) return false;
         if (playerId != that.playerId) return false;
         if (timeOn != null ? !timeOn.equals(that.timeOn) : that.timeOn != null) return false;
-        if (timeOff != null ? !timeOff.equals(that.timeOff) : that.timeOff != null) return false;
-
-        return true;
+        return timeOff != null ? timeOff.equals(that.timeOff) : that.timeOff == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + gameId;
+        result = 31 * result + teamId;
         result = 31 * result + playerId;
         result = 31 * result + (timeOn != null ? timeOn.hashCode() : 0);
         result = 31 * result + (timeOff != null ? timeOff.hashCode() : 0);

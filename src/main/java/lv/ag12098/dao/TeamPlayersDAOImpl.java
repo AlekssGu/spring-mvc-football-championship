@@ -1,4 +1,5 @@
 package lv.ag12098.dao;
+import lv.ag12098.entity.TeamEntity;
 import lv.ag12098.entity.TeamPlayersEntity;
 import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,12 +30,13 @@ public class TeamPlayersDAOImpl extends AbstractBaseDAOImpl<TeamPlayersEntity>
                 return nextSeq.intValue();
         }
 
-        public boolean exists(String teamPlayerName, String teamPlayerSurname) {
+        public boolean exists(String teamPlayerName, String teamPlayerSurname, TeamEntity teamEntity) {
             Query query = currentSession().createQuery("select count(*) from " + entityName() +
-                    " where name = :teamPlayerName and surname = :teamPlayerSurname");
+                    " where name = :teamPlayerName and surname = :teamPlayerSurname and team_id = :teamId");
 
             query.setParameter("teamPlayerName", teamPlayerName);
             query.setParameter("teamPlayerSurname", teamPlayerSurname);
+            query.setParameter("teamId", teamEntity.getId());
 
             Long count = (Long) query.uniqueResult();
 
@@ -42,11 +44,20 @@ public class TeamPlayersDAOImpl extends AbstractBaseDAOImpl<TeamPlayersEntity>
             else return false;
         }
 
-        public TeamPlayersEntity getTeamPlayerByFullName (String teamPlayerName, String teamPlayerSurname) {
+        public TeamPlayersEntity findByPlayerNumber(Integer playerNumber, TeamEntity teamEntity) {
             return (TeamPlayersEntity) currentSession()
-                    .createQuery("from " + entityName() + " where name = :teamPlayerName and surname = :teamPlayerSurname")
+                    .createQuery("from " + entityName() + " where playerNumber = :playerNumber and team_id = :teamId")
+                    .setParameter("playerNumber", playerNumber)
+                    .setParameter("teamId", teamEntity.getId())
+                    .uniqueResult();
+        }
+
+        public TeamPlayersEntity getTeamPlayerByFullName (String teamPlayerName, String teamPlayerSurname, TeamEntity teamEntity) {
+            return (TeamPlayersEntity) currentSession()
+                    .createQuery("from " + entityName() + " where name = :teamPlayerName and surname = :teamPlayerSurname and team_id = :teamId")
                     .setParameter("teamPlayerName", teamPlayerName)
                     .setParameter("teamPlayerSurname", teamPlayerSurname)
+                    .setParameter("teamId", teamEntity.getId())
                     .uniqueResult();
         }
 }

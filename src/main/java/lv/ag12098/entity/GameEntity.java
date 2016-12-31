@@ -13,6 +13,8 @@ public class GameEntity {
     private Date gameDate;
     private Integer attendees;
     private String place;
+    private Integer gameRound;
+    private Integer gameSeq;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +57,26 @@ public class GameEntity {
         this.place = place;
     }
 
+    @Basic
+    @Column(name = "game_round")
+    public Integer getGameRound() {
+        return gameRound;
+    }
+
+    public void setGameRound(Integer gameRound) {
+        this.gameRound = gameRound;
+    }
+
+    @Basic
+    @Column(name = "game_round_seq")
+    public Integer getGameSeq() {
+        return gameSeq;
+    }
+
+    public void setGameSeq(Integer gameSeq) {
+        this.gameSeq = gameSeq;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,20 +84,22 @@ public class GameEntity {
 
         GameEntity that = (GameEntity) o;
 
-        if (id != that.id) return false;
-        if (attendees != that.attendees) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (gameDate != null ? !gameDate.equals(that.gameDate) : that.gameDate != null) return false;
+        if (attendees != null ? !attendees.equals(that.attendees) : that.attendees != null) return false;
         if (place != null ? !place.equals(that.place) : that.place != null) return false;
-
-        return true;
+        if (gameRound != null ? !gameRound.equals(that.gameRound) : that.gameRound != null) return false;
+        return gameSeq != null ? gameSeq.equals(that.gameSeq) : that.gameSeq == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (gameDate != null ? gameDate.hashCode() : 0);
-        result = 31 * result + attendees;
+        result = 31 * result + (attendees != null ? attendees.hashCode() : 0);
         result = 31 * result + (place != null ? place.hashCode() : 0);
+        result = 31 * result + (gameRound != null ? gameRound.hashCode() : 0);
+        result = 31 * result + (gameSeq != null ? gameSeq.hashCode() : 0);
         return result;
     }
 }

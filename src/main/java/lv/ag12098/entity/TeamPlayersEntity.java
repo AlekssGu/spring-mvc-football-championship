@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class TeamPlayersEntity {
     private int id;
     private int teamId;
+    private int playerNumber;
     private String position;
     private String name;
     private String surname;
@@ -65,6 +66,16 @@ public class TeamPlayersEntity {
         this.surname = surname;
     }
 
+    @Basic
+    @Column(name = "player_number")
+    public int getPlayerNumber() {
+        return playerNumber;
+    }
+
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,17 +85,17 @@ public class TeamPlayersEntity {
 
         if (id != that.id) return false;
         if (teamId != that.teamId) return false;
+        if (playerNumber != that.playerNumber) return false;
         if (position != null ? !position.equals(that.position) : that.position != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
-
-        return true;
+        return surname != null ? surname.equals(that.surname) : that.surname == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + teamId;
+        result = 31 * result + playerNumber;
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (surname != null ? surname.hashCode() : 0);

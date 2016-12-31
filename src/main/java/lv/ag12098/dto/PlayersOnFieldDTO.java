@@ -11,6 +11,7 @@ public class PlayersOnFieldDTO {
     private int id;
     private int gameId;
     private int playerId;
+    private int teamId;
     private Timestamp timeOn;
     private Timestamp timeOff;
 
@@ -38,6 +39,14 @@ public class PlayersOnFieldDTO {
         this.playerId = playerId;
     }
 
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
     public Timestamp getTimeOn() {
         return timeOn;
     }
@@ -58,6 +67,7 @@ public class PlayersOnFieldDTO {
         this.id = entity.getId();
         this.gameId = entity.getGameId();
         this.playerId = entity.getPlayerId();
+        this.teamId = entity.getTeamId();
         this.timeOn = entity.getTimeOn();
         this.timeOff = entity.getTimeOff();
     }

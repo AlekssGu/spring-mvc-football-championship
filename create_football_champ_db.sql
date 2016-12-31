@@ -29,6 +29,8 @@ CREATE TABLE game (
     game_date Date NOT NULL,
     attendees Integer NOT NULL,
     place Varchar(50) NOT NULL,
+    game_round Integer,
+    game_round_seq Integer,
     PRIMARY KEY (id)
 );    
 
@@ -107,6 +109,7 @@ CREATE TABLE team_players (
     position varchar(1) NOT NULL,
     name varchar(50),
     surname varchar(50),
+    player_number Integer,
     PRIMARY KEY (id),
     FOREIGN KEY (team_id) REFERENCES team (id)
 );    
@@ -116,6 +119,7 @@ CREATE TABLE team_players (
 CREATE TABLE players_on_field (
   	id Integer NOT NULL DEFAULT nextval('players_on_field_seq'),
     game_id Integer NOT NULL,
+    team_id Integer NOT NULL,
     player_id Integer NOT NULL,
     time_on timestamp,
     time_off timestamp,
