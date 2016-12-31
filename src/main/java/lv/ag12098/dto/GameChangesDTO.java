@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 public class GameChangesDTO {
     private int id;
     private int gameId;
+    private int teamId;
     private Timestamp changeTime;
     private Integer playerOffNumber;
     private Integer playerOnNumber;
@@ -27,6 +28,14 @@ public class GameChangesDTO {
 
     public void setGameId(int gameId) {
         this.gameId = gameId;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     public Timestamp getChangeTime() {
@@ -53,11 +62,12 @@ public class GameChangesDTO {
         this.playerOnNumber = playerOnNumber;
     }
 
-    public GameChangesDTO(GameChangesEntity entity) {
-        this.id = entity.getId();
-        this.gameId = entity.getGameId();
-        this.changeTime = entity.getChangeTime();
-        this.playerOffNumber = entity.getPlayerOffNumber();
-        this.playerOnNumber = entity.getPlayerOnNumber();
+    public GameChangesDTO(int id, int gameId, int teamId, Timestamp changeTime, Integer playerOffNumber, Integer playerOnNumber) {
+        this.id = id;
+        this.gameId = gameId;
+        this.teamId = teamId;
+        this.changeTime = changeTime;
+        this.playerOffNumber = playerOffNumber;
+        this.playerOnNumber = playerOnNumber;
     }
 }

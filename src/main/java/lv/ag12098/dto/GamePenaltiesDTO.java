@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 public class GamePenaltiesDTO {
     private int id;
     private int gameId;
+    private int teamId;
     private Timestamp penaltyTime;
     private Integer playerNumber;
 
@@ -29,6 +30,14 @@ public class GamePenaltiesDTO {
         this.gameId = gameId;
     }
 
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
     public Timestamp getPenaltyTime() {
         return penaltyTime;
     }
@@ -45,10 +54,11 @@ public class GamePenaltiesDTO {
         this.playerNumber = playerNumber;
     }
 
-    public GamePenaltiesDTO(GamePenaltiesEntity entity) {
-        this.id = entity.getId();
-        this.gameId = entity.getGameId();
-        this.penaltyTime = entity.getPenaltyTime();
-        this.playerNumber = entity.getPlayerNumber();
+    public GamePenaltiesDTO(int id, int gameId, int teamId, Timestamp penaltyTime, Integer playerNumber) {
+        this.id = id;
+        this.gameId = gameId;
+        this.teamId = teamId;
+        this.penaltyTime = penaltyTime;
+        this.playerNumber = playerNumber;
     }
 }

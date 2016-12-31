@@ -38,11 +38,13 @@ CREATE TABLE game (
 
 CREATE TABLE game_penalties (
 	id Integer NOT NULL DEFAULT nextval('game_penalties_seq'),
+    team_id Integer NOT NULL,
     game_id Integer NOT NULL,
     penalty_time timestamp,
     player_number Integer,
     PRIMARY KEY (id),
-    FOREIGN KEY (game_id) REFERENCES game (id)
+    FOREIGN KEY (game_id) REFERENCES game (id),
+    FOREIGN KEY (team_id) REFERENCES team (id)
 );
 
 -- drop table game_changes;
@@ -50,11 +52,13 @@ CREATE TABLE game_penalties (
 CREATE TABLE game_changes (
 	id Integer NOT NULL DEFAULT nextval('game_changes_seq'),
     game_id Integer NOT NULL,
+    team_id Integer NOT NULL,
     change_time timestamp,
     player_off_number Integer,
     player_on_number Integer,
     PRIMARY KEY (id),
-    FOREIGN KEY (game_id) REFERENCES game (id)
+    FOREIGN KEY (game_id) REFERENCES game (id),
+    FOREIGN KEY (team_id) REFERENCES team (id)
 );
 
 -- drop table team CASCADE;
@@ -125,6 +129,34 @@ CREATE TABLE players_on_field (
     time_off timestamp,
     PRIMARY KEY (id),
     FOREIGN KEY (game_id) REFERENCES game (id),
-    FOREIGN KEY (player_id) REFERENCES team_players (id)
+    FOREIGN KEY (player_id) REFERENCES team_players (id),
+    FOREIGN KEY (team_id) REFERENCES team (id)
 );
 
+/* queries
+select * from public.team;
+select * from public.game;
+select * from public.game_referees;
+select team_id, count(*) from public.team_players group by team_id;
+select * from public.players_on_field;
+select * from game_goals;
+select * from goal_assists;
+select * from game_changes;
+select chn.*, tpl.name, tpl.surname, plo.time_on, plo.time_off, 
+  from players_on_field plo
+  join team tem on tem.id = plo.team_id
+  join team_players tpl on tpl.team_id = tem.id and tpl.id = plo.player_id
+  join game_changes chn on chn.team_id = tem.id and chn.player_on_number = tpl.player_number;
+  
+select * from game_penalties;  
+
+delete from game_penalties;
+delete from game_changes;
+delete from goal_assists;
+delete from game_goals;
+delete from public.players_on_field;
+delete from public.game_referees;
+delete from public.game;
+delete from public.team_players;
+delete from public.team;
+*/

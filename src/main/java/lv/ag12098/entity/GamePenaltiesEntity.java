@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class GamePenaltiesEntity {
     private int id;
     private int gameId;
+    private int teamId;
     private Timestamp penaltyTime;
     private Integer playerNumber;
 
@@ -33,6 +34,16 @@ public class GamePenaltiesEntity {
 
     public void setGameId(int gameId) {
         this.gameId = gameId;
+    }
+
+    @Basic
+    @Column(name = "team_id")
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     @Basic
@@ -64,16 +75,16 @@ public class GamePenaltiesEntity {
 
         if (id != that.id) return false;
         if (gameId != that.gameId) return false;
+        if (teamId != that.teamId) return false;
         if (penaltyTime != null ? !penaltyTime.equals(that.penaltyTime) : that.penaltyTime != null) return false;
-        if (playerNumber != null ? !playerNumber.equals(that.playerNumber) : that.playerNumber != null) return false;
-
-        return true;
+        return playerNumber != null ? playerNumber.equals(that.playerNumber) : that.playerNumber == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + gameId;
+        result = 31 * result + teamId;
         result = 31 * result + (penaltyTime != null ? penaltyTime.hashCode() : 0);
         result = 31 * result + (playerNumber != null ? playerNumber.hashCode() : 0);
         return result;

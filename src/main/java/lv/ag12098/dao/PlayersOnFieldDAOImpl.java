@@ -1,4 +1,5 @@
 package lv.ag12098.dao;
+import lv.ag12098.entity.GameEntity;
 import lv.ag12098.entity.PlayersOnFieldEntity;
 import lv.ag12098.entity.TeamEntity;
 import lv.ag12098.entity.TeamPlayersEntity;
@@ -15,10 +16,11 @@ public class PlayersOnFieldDAOImpl extends AbstractBaseDAOImpl<PlayersOnFieldEnt
 
     //unikālais automašīnas ieraksts pēc ID - implementācija
     @Override
-    public PlayersOnFieldEntity getPlayerOnFieldbyPlayerId (Integer teamPlayerId){
+    public PlayersOnFieldEntity getPlayerOnFieldbyPlayerId (Integer teamPlayerId, GameEntity gameEntity){
             return (PlayersOnFieldEntity) currentSession()
-                    .createQuery("from " + entityName() + " where player_id = :teamPlayerId ")
+                    .createQuery("from " + entityName() + " where player_id = :teamPlayerId and game_id = :gameId")
                     .setParameter("teamPlayerId", teamPlayerId)
+                    .setParameter("gameId", gameEntity.getId())
                     .uniqueResult();
     }
 
