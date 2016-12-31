@@ -32,14 +32,14 @@
                                 <tr>
                                     <td th:text="${iterStat.count}"></td>
                                     <td th:text="${team.teamName}"></td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
+                                    <td th:text="${team.gameCount}"></td>
+                                    <td th:text="${team.gamesWon}"></td>
+                                    <td th:text="${team.gamesTied}"></td>
+                                    <td th:text="${team.gamesLost}"></td>
+                                    <td th:text="${team.goalsScored}"></td>
+                                    <td th:text="${team.goalsLost}"></td>
+                                    <td th:text="${team.goalsRelation}"></td>
+                                    <td th:text="${team.totalPoints}"></td>
                                 </tr>
                             </th:block>
                         </tbody>
