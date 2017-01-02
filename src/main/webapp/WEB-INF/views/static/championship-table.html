@@ -13,35 +13,66 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">
+                <h3>Komandu statistika</h3>
+                <div class="table-responsive well">
                     <table class="table table-striped">
                         <thead>
-                            <th>Nr.p.k.</th>
-                            <th>Komandas nosaukums</th>
-                            <th>Spēles</th>
-                            <th>Uzvara</th>
-                            <th>Neizšķirts</th>
-                            <th>Zaudējums</th>
-                            <th>Gūtie vārti</th>
-                            <th>Zaudētie vārti</th>
-                            <th>Vārtu attiecība</th>
-                            <th>Punkti</th>
+                        <th>Vieta</th>
+                        <th>Komandas nosaukums</th>
+                        <th>Spēles</th>
+                        <th>Uzvaras (P)</th>
+                        <th>Zaudējumi (P)</th>
+                        <th>Gūtie vārti</th>
+                        <th>Zaudētie vārti</th>
+                        <th>Vārtu attiecība</th>
+                        <th>Punkti</th>
                         </thead>
                         <tbody class="">
-                            <th:block th:each="team, iterStat : ${teams}">
-                                <tr>
-                                    <td th:text="${iterStat.count}"></td>
-                                    <td th:text="${team.teamName}"></td>
-                                    <td th:text="${team.gameCount}"></td>
-                                    <td th:text="${team.gamesWon}"></td>
-                                    <td th:text="${team.gamesTied}"></td>
-                                    <td th:text="${team.gamesLost}"></td>
-                                    <td th:text="${team.goalsScored}"></td>
-                                    <td th:text="${team.goalsLost}"></td>
-                                    <td th:text="${team.goalsRelation}"></td>
-                                    <td th:text="${team.totalPoints}"></td>
-                                </tr>
-                            </th:block>
+                        <th:block th:each="team, iterStat : ${teams}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${team.teamName}"></td>
+                                <td th:text="${team.gameCount}"></td>
+                                <td th:text="${team.gamesWon + ' (' + team.gamesWonOT + ')'}"></td>
+                                <td th:text="${team.gamesLost + ' (' + team.gamesLostOT + ')'}"></td>
+                                <td th:text="${team.goalsScored}"></td>
+                                <td th:text="${team.goalsLost}"></td>
+                                <td th:text="${team.goalsRelation}"></td>
+                                <td th:text="${team.totalPoints}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Spēlētāju statistika</h3>
+                <div class="table-responsive well">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Vieta</th>
+                        <th>Vārds</th>
+                        <th>Uzvārds</th>
+                        <th>Komandas nosaukums</th>
+                        <th>Gūtie vārti</th>
+                        <th>Rezultatīvās piespēles</th>
+                        <th>Punkti</th>
+                        </thead>
+                        <tbody class="">
+                        <th:block th:each="player, iterStat : ${players}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${player.teamPlayer.name}"></td>
+                                <td th:text="${player.teamPlayer.surname}"></td>
+                                <td th:text="${player.teamEntity.teamName}"></td>
+                                <td th:text="${player.goals}"></td>
+                                <td th:text="${player.assists}"></td>
+                                <td th:text="${player.goals + player.assists}"></td>
+                            </tr>
+                        </th:block>
                         </tbody>
                     </table>
                 </div>

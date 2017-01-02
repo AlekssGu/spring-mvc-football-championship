@@ -102,6 +102,10 @@ public class TeamDTO {
         this.totalPoints = totalPoints;
     }
 
+    public void calcGoalRelation() {
+        this.goalsRelation = this.goalsScored - this.goalsLost;
+    }
+
     public TeamDTO(TeamEntity teamEntity) {
         this.id = id;
         this.teamName = teamEntity.getTeamName();

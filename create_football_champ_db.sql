@@ -9,8 +9,7 @@ CREATE DATABASE football_champ
     LC_COLLATE = 'Latvian_Latvia.1257'
     LC_CTYPE = 'Latvian_Latvia.1257'
     TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
-    
+    CONNECTION LIMIT = -1;    
     
 CREATE SEQUENCE game_seq;
 CREATE SEQUENCE game_penalties_seq;
@@ -31,8 +30,22 @@ CREATE TABLE game (
     place Varchar(50) NOT NULL,
     game_round Integer,
     game_round_seq Integer,
-    PRIMARY KEY (id)
+    is_overtime Boolean,
+    team_home_id Integer,
+    team_guest_id Integer,
+    team_won_id Integer,
+    PRIMARY KEY (id),
+    FOREIGN KEY (team_home_id) REFERENCES team (id),
+    FOREIGN KEY (team_guest_id) REFERENCES team (id)
 );    
+
+-- drop table best_players;
+
+CREATE TABLE best_players (
+    id Integer NOT NULL, 
+    goals Integer NOT NULL,
+    assists Integer NOT NULL
+);
 
 -- drop table game_penalties;
 

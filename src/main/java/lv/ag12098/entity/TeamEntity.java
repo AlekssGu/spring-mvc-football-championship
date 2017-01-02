@@ -20,6 +20,15 @@ public class TeamEntity {
     private int goalsRelation;
     private int totalPoints;
 
+    @Transient
+    private int gamesWonOT;
+    private int gamesWonFT;
+    private int gamesLostOT;
+    private int gamesLostFT;
+
+    // vērtība mainās katrai spēlei un kolonna nav datubāzē:
+    private int gameGoalsScored;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -29,6 +38,16 @@ public class TeamEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Transient
+    public int getGameGoalsScored() {
+        return gameGoalsScored;
+    }
+
+    @Transient
+    public void setGameGoalsScored(int gameGoalsScored) {
+        this.gameGoalsScored = gameGoalsScored;
     }
 
     @Basic
@@ -119,5 +138,41 @@ public class TeamEntity {
 
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    @Transient
+    public int getGamesWonOT() {
+        return gamesWonOT;
+    }
+
+    public void setGamesWonOT(int gamesWonOT) {
+        this.gamesWonOT = gamesWonOT;
+    }
+
+    @Transient
+    public int getGamesWonFT() {
+        return gamesWonFT;
+    }
+
+    public void setGamesWonFT(int gamesWonFT) {
+        this.gamesWonFT = gamesWonFT;
+    }
+
+    @Transient
+    public int getGamesLostOT() {
+        return gamesLostOT;
+    }
+
+    public void setGamesLostOT(int gamesLostOT) {
+        this.gamesLostOT = gamesLostOT;
+    }
+
+    @Transient
+    public int getGamesLostFT() {
+        return gamesLostFT;
+    }
+
+    public void setGamesLostFT(int gamesLostFT) {
+        this.gamesLostFT = gamesLostFT;
     }
 }

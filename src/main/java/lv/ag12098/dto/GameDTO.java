@@ -11,6 +11,9 @@ public class GameDTO {
     private String place;
     private Integer gameRound;
     private Integer gameSeq;
+    private boolean isOvertime;
+    private Integer teamHomeId;
+    private Integer teamGuestId;
 
     GameDTO(){
 
@@ -64,12 +67,39 @@ public class GameDTO {
         this.gameSeq = gameSeq;
     }
 
-    public GameDTO(int id, Date gameDate, int attendees, String place, Integer gameRound, Integer gameSeq) {
+    public boolean isOvertime() {
+        return isOvertime;
+    }
+
+    public void setOvertime(boolean overtime) {
+        isOvertime = overtime;
+    }
+
+    public Integer getTeamHomeId() {
+        return teamHomeId;
+    }
+
+    public void setTeamHomeId(Integer teamHomeId) {
+        this.teamHomeId = teamHomeId;
+    }
+
+    public Integer getTeamGuestId() {
+        return teamGuestId;
+    }
+
+    public void setTeamGuestId(Integer teamGuestId) {
+        this.teamGuestId = teamGuestId;
+    }
+
+    public GameDTO(int id, Date gameDate, int attendees, String place, Integer gameRound, Integer gameSeq, boolean isOvertime, Integer teamHomeId, Integer teamGuestId) {
         this.id = id;
         this.gameDate = gameDate;
         this.attendees = attendees;
         this.place = place;
         this.gameRound = gameRound;
         this.gameSeq = gameSeq;
+        this.isOvertime = isOvertime;
+        this.teamHomeId = teamHomeId;
+        this.teamGuestId = teamGuestId;
     }
 }

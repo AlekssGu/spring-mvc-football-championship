@@ -68,10 +68,12 @@ public class ChampionshipDataParser {
         String line;
         Integer gameRound = 1;
         Integer gameRoundSeq = 1;
+        GameEntity gameEntity = null;
 
         try {
             // Iterate over all championship data json files
             for (URL jsonFileUrl : generateUrlArray()) {
+
                 String jsonText = "";
 
                 System.out.println("url = " + jsonFileUrl);
@@ -97,7 +99,7 @@ public class ChampionshipDataParser {
                 System.out.println("        Speles vieta: " + game.getString("Vieta"));
                 System.out.println("        Skatitaju skaits: " + game.getString("Skatitaji"));
 
-                GameEntity gameEntity = new GameEntity();
+                gameEntity = new GameEntity();
 
                 try {
                     DateFormat df = new SimpleDateFormat("YYYY/MM/DD");
@@ -117,7 +119,6 @@ public class ChampionshipDataParser {
                 JSONObject referee = game.getJSONObject("VT");
                 saveRefereeData(linesmen, referee, gameEntity);
 
-
                 JSONArray team = game.getJSONArray("Komanda");
                 saveTeamData(team, gameEntity);
 
@@ -132,10 +133,108 @@ public class ChampionshipDataParser {
             System.out.println("[ERROR] Kļūda, apstrādājot JSON datus");
             e.printStackTrace();
         }
-
     }
 
-    private boolean saveTeamPlayersData(JSONObject teamPlayers, GameEntity gameEntity, TeamEntity teamEntity)
+    public static Integer nvl(Integer value, Integer alternateValue) {
+        if (value == null)
+            return alternateValue;
+
+        return value;
+    }
+
+    private void calculateTeamStatistics(List<TeamEntity> teamList, GameEntity gameEntity) {
+        Integer goalsScoredHome = 0, goalsScoredGuest = 0;
+        Integer count = 0, goalsCount = 0;
+
+        Integer winnerPoints = 0, loserPoints = 0;
+
+        if (teamList.size() == 2) {
+            TeamEntity teamHome = teamList.get(0);
+            TeamEntity teamGuest = teamList.get(1);
+
+            goalsScoredHome = teamHome.getGameGoalsScored();
+            goalsScoredGuest = teamGuest.getGameGoalsScored();
+
+            if (goalsScoredHome > goalsScoredGuest) {
+                // home won
+                gameEntity.setTeamWonId(teamHome.getId());
+                gameDAO.save(gameEntity);
+
+                count = nvl(teamHome.getGamesWon(),0);
+                teamHome.setGamesWon(++count);
+
+                count = nvl(teamGuest.getGamesLost(),0);
+                teamGuest.setGamesLost(++count);
+
+                winnerPoints = teamHome.getTotalPoints();
+                loserPoints = teamGuest.getTotalPoints();
+
+                if(gameEntity.isOvertime()) {
+                    winnerPoints += 3;
+                    loserPoints += 2;
+                } else {
+                    winnerPoints += 5;
+                    loserPoints += 1;
+                }
+
+                teamHome.setTotalPoints(winnerPoints);
+                teamGuest.setTotalPoints(loserPoints);
+
+            } else if (goalsScoredHome < goalsScoredGuest) {
+                // guest won
+                gameEntity.setTeamWonId(teamGuest.getId());
+                gameDAO.save(gameEntity);
+
+                count = nvl(teamGuest.getGamesWon(),0);
+                teamGuest.setGamesWon(++count);
+
+                count = nvl(teamHome.getGamesLost(),0);
+                teamHome.setGamesLost(++count);
+
+                winnerPoints = teamGuest.getTotalPoints();
+                loserPoints = teamHome.getTotalPoints();
+
+                if(gameEntity.isOvertime()) {
+                    winnerPoints += 3;
+                    loserPoints += 2;
+                } else {
+                    winnerPoints += 5;
+                    loserPoints += 1;
+                }
+
+                teamGuest.setTotalPoints(winnerPoints);
+                teamHome.setTotalPoints(loserPoints);
+            } else if(goalsScoredGuest == goalsScoredHome) {
+                // tie
+                count = nvl(teamHome.getGamesTied(), 0);
+                teamHome.setGamesTied(++count);
+
+                count = teamGuest.getGamesTied();
+                teamGuest.setGamesTied(++count);
+            }
+
+            // Goals won / lost
+            // // Home goals lost
+            count = teamGuest.getGameGoalsScored();
+            goalsCount = teamHome.getGoalsLost();
+            teamHome.setGoalsLost(goalsCount + count);
+            // // Guest goals lost
+            count = teamHome.getGameGoalsScored();
+            goalsCount = teamGuest.getGoalsLost();
+            teamGuest.setGoalsLost(goalsCount + count);
+
+            teamHome.setGoalsRelation(teamHome.getGoalsScored() - teamHome.getGoalsLost());
+            teamGuest.setGoalsRelation(teamGuest.getGoalsScored() - teamGuest.getGoalsLost());
+
+            teamDAO.save(teamHome);
+            teamDAO.save(teamGuest);
+
+        } else {
+            System.out.println("[ERROR] Nav iespējams apstrādāt vairāk kā divu komandu datus");
+        }
+    }
+
+    private void saveTeamPlayersData(JSONObject teamPlayers, GameEntity gameEntity, TeamEntity teamEntity)
     {
         try {
             TeamPlayersEntity teamPlayersEntity;
@@ -162,13 +261,11 @@ public class ChampionshipDataParser {
         } catch (JSONException e) {
             System.out.println("[ERROR] Kļūda, saglabājot spēlētāju datus:");
             e.printStackTrace();
-            return false;
         }
 
-        return true;
     }
 
-    private boolean savePlayersOnFieldData(JSONObject playersOnField, GameEntity gameEntity, TeamEntity teamEntity)
+    private void savePlayersOnFieldData(JSONObject playersOnField, GameEntity gameEntity, TeamEntity teamEntity)
     {
         try {
             JSONArray playerData = playersOnField.getJSONArray("Speletajs");
@@ -189,14 +286,14 @@ public class ChampionshipDataParser {
         } catch (JSONException e) {
             System.out.println("[ERROR] Kļūda, saglabājot laukuma spēlētāju datus:");
             e.printStackTrace();
-            return false;
         }
 
-        return true;
     }
 
-    private boolean saveTeamGoalsData(JSONObject teamGoals, GameEntity gameEntity, TeamEntity teamEntity)
+    private Integer saveTeamGoalsData(JSONObject teamGoals, GameEntity gameEntity, TeamEntity teamEntity)
     {
+        Integer goalCount = 0;
+
         try {
             JSONObject goalsScoredObj = teamGoals.optJSONObject("VG");
 
@@ -209,6 +306,12 @@ public class ChampionshipDataParser {
                 String[] timesplit = timeScored.split(":");
                 Time time = new Time(0, Integer.valueOf(timesplit[0]), Integer.valueOf(timesplit[1]));
 
+                // ja vārtu laiks ir lielāks par 60, tas nozīmē, ka tie tika iegūti spēles papildlaikā
+                if (time.getHours() != 0) {
+                    gameEntity.setOvertime(true);
+                    gameDAO.save(gameEntity);
+                }
+
                 GameGoalsEntity gameGoalsEntity = new GameGoalsEntity();
                 gameGoalsEntity.setGameId(gameEntity.getId());
                 gameGoalsEntity.setTeamId(teamEntity.getId());
@@ -216,6 +319,7 @@ public class ChampionshipDataParser {
                 gameGoalsEntity.setPlayerNumber(playerNumber);
                 gameGoalsEntity.setGoalTime(new Timestamp(time.getTime()));
                 gameGoalsDAO.save(gameGoalsEntity);
+                goalCount++;
             } else {
                 // Array
                 JSONArray goalsScored = teamGoals.optJSONArray("VG");
@@ -228,6 +332,12 @@ public class ChampionshipDataParser {
                     String[] timesplit = timeScored.split(":");
                     Time time = new Time(0, Integer.valueOf(timesplit[0]), Integer.valueOf(timesplit[1]));
 
+                    // ja vārtu laiks ir lielāks par 60, tas nozīmē, ka tie tika iegūti spēles papildlaikā
+                    if (time.getHours() != 0) {
+                        gameEntity.setOvertime(true);
+                        gameDAO.save(gameEntity);
+                    }
+
                     GameGoalsEntity gameGoalsEntity = new GameGoalsEntity();
                     gameGoalsEntity.setGameId(gameEntity.getId());
                     gameGoalsEntity.setTeamId(teamEntity.getId());
@@ -235,6 +345,7 @@ public class ChampionshipDataParser {
                     gameGoalsEntity.setPlayerNumber(playerNumber);
                     gameGoalsEntity.setGoalTime(new Timestamp(time.getTime()));
                     gameGoalsDAO.save(gameGoalsEntity);
+                    goalCount++;
 
                     try {
                         JSONArray goalAssists = goalRow.getJSONArray("P");
@@ -254,13 +365,18 @@ public class ChampionshipDataParser {
         } catch (JSONException e) {
             System.out.println("[ERROR] Kļūda, saglabājot komandu iesisto vārtu datus:");
             e.printStackTrace();
-            return false;
+            return null;
         }
 
-        return true;
+        // Uzstāda gūto vārtu skaitu, lai vēlāk varētu aprēķināt čempionāta statistiku
+        teamEntity.setGoalsScored(goalCount + nvl(teamEntity.getGoalsScored(),0));
+        teamDAO.save(teamEntity);
+
+        return goalCount;
+
     }
 
-    private boolean saveGameChangesData(JSONObject gameChanges, GameEntity gameEntity, TeamEntity teamEntity)
+    private void saveGameChangesData(JSONObject gameChanges, GameEntity gameEntity, TeamEntity teamEntity)
     {
         try {
             JSONObject changeData = gameChanges.optJSONObject("Maina");
@@ -273,6 +389,12 @@ public class ChampionshipDataParser {
                 String[] timesplit = timeChanged.split(":");
 
                 Time time = new Time(0, Integer.valueOf(timesplit[0]), Integer.valueOf(timesplit[1]));
+
+                // ja maiņas laiks ir lielāks par 60, tas nozīmē, ka tā tika veikta spēles papildlaikā
+                if (time.getHours() != 0) {
+                    gameEntity.setOvertime(true);
+                    gameDAO.save(gameEntity);
+                }
 
                 // new change
                 GameChangesEntity gameChangesEntity = new GameChangesEntity();
@@ -309,6 +431,12 @@ public class ChampionshipDataParser {
 
                     Time time = new Time(0, Integer.valueOf(timesplit[0]), Integer.valueOf(timesplit[1]));
 
+                    // ja maiņas laiks ir lielāks par 60, tas nozīmē, ka tā tika veikta spēles papildlaikā
+                    if (time.getHours() != 0) {
+                        gameEntity.setOvertime(true);
+                        gameDAO.save(gameEntity);
+                    }
+
                     // new change
                     GameChangesEntity gameChangesEntity = new GameChangesEntity();
                     gameChangesEntity.setGameId(gameEntity.getId());
@@ -337,13 +465,11 @@ public class ChampionshipDataParser {
         } catch (JSONException e) {
             System.out.println("[ERROR] Kļūda, saglabājot spēlētāju maiņu datus:");
             e.printStackTrace();
-            return false;
         }
 
-        return true;
     }
 
-    private boolean saveTeamPenaltyData(JSONObject teamPenalties, GameEntity gameEntity, TeamEntity teamEntity)
+    private void saveTeamPenaltyData(JSONObject teamPenalties, GameEntity gameEntity, TeamEntity teamEntity)
     {
         try {
             JSONObject teamPenalty = teamPenalties.optJSONObject("Sods");
@@ -384,13 +510,11 @@ public class ChampionshipDataParser {
         } catch (JSONException e) {
             System.out.println("[ERROR] Kļūda, saglabājot komandu sodu datus:");
             e.printStackTrace();
-            return false;
         }
 
-        return true;
     }
 
-    private boolean saveRefereeData(JSONArray linesmen, JSONObject referee, GameEntity gameEntity)
+    private void saveRefereeData(JSONArray linesmen, JSONObject referee, GameEntity gameEntity)
     {
         String key = null;
         Iterator keys = null;
@@ -427,15 +551,15 @@ public class ChampionshipDataParser {
         } catch (Exception e) {
             System.out.println("[ERROR] Kļūda, apstrādājot tiesnešu datus:");
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
-    private boolean saveTeamData(JSONArray team, GameEntity gameEntity)
+    private void saveTeamData(JSONArray team, GameEntity gameEntity)
     {
-
-        TeamEntity teamEntity;
+        TeamEntity teamEntity = null;
+        List<TeamEntity> teamList = new ArrayList<>();
+        Integer gameCount = 0;
+        Integer goalCount = 0;
 
         System.out.println("Komandas dati");
         try {
@@ -452,6 +576,19 @@ public class ChampionshipDataParser {
                     teamDAO.save(teamEntity);
                 }
 
+                if (i == 0) {
+                    gameEntity.setTeamHomeId(teamEntity.getId());
+                } else {
+                    gameEntity.setTeamGuestId(teamEntity.getId());
+                }
+                gameDAO.save(gameEntity);
+
+                // Palielina nospēlēto spēļu skaitu komandai
+                gameCount = teamEntity.getGameCount();
+                gameCount++;
+                teamEntity.setGameCount(gameCount);
+                teamDAO.save(teamEntity);
+
                 JSONObject teamPlayers = row.getJSONObject("Speletaji");
                 saveTeamPlayersData(teamPlayers, gameEntity, teamEntity);
 
@@ -461,13 +598,19 @@ public class ChampionshipDataParser {
                 JSONObject teamGoals = row.optJSONObject("Varti");
                 // Object
                 if (teamGoals != null) {
-                    saveTeamGoalsData(teamGoals, gameEntity, teamEntity);
+                    goalCount = saveTeamGoalsData(teamGoals, gameEntity, teamEntity);
+                    teamEntity.setGameGoalsScored(goalCount);
                 } else {
                     // Array
                     JSONArray teamGoalsArray = row.optJSONArray("Varti");
                     if (teamGoalsArray == null) System.out.println("Komanda nav iesitusi nevienus vārtus");
                     else System.out.println("[ERROR] Vārtu masīvs nav tukšs");
+
+                    teamEntity.setGameGoalsScored(0);
                 }
+
+                teamList.add(teamEntity);
+
 
                 JSONObject gameChanges = row.optJSONObject("Mainas");
 
@@ -500,9 +643,10 @@ public class ChampionshipDataParser {
         } catch (Exception e) {
             System.out.println("[ERROR] Kļūda, apstrādājot komandas datus:");
             e.printStackTrace();
-            return false;
         }
 
-        return true;
+        // Aprēķina, kurš uzvarējis un cik vārti ir ielaisti (un citu informāciju)
+        calculateTeamStatistics(teamList, gameEntity);
+
     }
 }
