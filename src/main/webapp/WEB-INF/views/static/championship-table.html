@@ -31,7 +31,7 @@
                         <th:block th:each="team, iterStat : ${teams}">
                             <tr>
                                 <td th:text="${iterStat.count + '.'}"></td>
-                                <td th:text="${team.teamName}"></td>
+                                <td><a th:href="@{/teamStatistics(id=${team.id}, action='show_all')}" th:text="${team.teamName}"></a></td>
                                 <td th:text="${team.gameCount}"></td>
                                 <td th:text="${team.gamesWon + ' (' + team.gamesWonOT + ')'}"></td>
                                 <td th:text="${team.gamesLost + ' (' + team.gamesLostOT + ')'}"></td>
@@ -39,6 +39,33 @@
                                 <td th:text="${team.goalsLost}"></td>
                                 <td th:text="${team.goalsRelation}"></td>
                                 <td th:text="${team.totalPoints}"></td>
+                            </tr>
+                            </a>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Tiesnešu statistika</h3>
+                <div class="table-responsive well">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Vieta</th>
+                        <th>Vārds</th>
+                        <th>Uzvārds</th>
+                        <th>Piešķirto sodu skaits</th>
+                        </thead>
+                        <tbody class="">
+                        <th:block th:each="referee, iterStat : ${referees}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${referee.refereesEntity.refereeName}"></td>
+                                <td th:text="${referee.refereesEntity.refereeSurname}"></td>
+                                <td th:text="${referee.penalties}"></td>
                             </tr>
                         </th:block>
                         </tbody>
@@ -71,6 +98,64 @@
                                 <td th:text="${player.goals}"></td>
                                 <td th:text="${player.assists}"></td>
                                 <td th:text="${player.goals + player.assists}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Vārtsargu statistika</h3>
+                <div class="table-responsive well">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Vieta</th>
+                        <th>Vārds</th>
+                        <th>Uzvārds</th>
+                        <th>Komandas nosaukums</th>
+                        <th>Ielaistie vārti</th>
+                        <th>Spēļu skaits</th>
+                        <th>Ielaisto vārtu / nospēlēto spēļu attiecība</th>
+                        </thead>
+                        <tbody class="">
+                        <th:block th:each="keeper, iterStat : ${goalKeepers}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${keeper.teamPlayer.name}"></td>
+                                <td th:text="${keeper.teamPlayer.surname}"></td>
+                                <td th:text="${keeper.teamEntity.teamName}"></td>
+                                <td th:text="${keeper.goals}"></td>
+                                <td th:text="${keeper.assists}"></td>
+                                <td th:text="${keeper.goalRatio}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Rupjāko spēlētāju statistika</h3>
+                <div class="table-responsive well">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Vieta</th>
+                        <th>Vārds</th>
+                        <th>Uzvārds</th>
+                        <th>Sodu skaits</th>
+                        </thead>
+                        <tbody class="">
+                        <th:block th:each="player, iterStat : ${worstPlayers}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${player.name}"></td>
+                                <td th:text="${player.surname}"></td>
+                                <td th:text="${player.penaltyCount}"></td>
                             </tr>
                         </th:block>
                         </tbody>

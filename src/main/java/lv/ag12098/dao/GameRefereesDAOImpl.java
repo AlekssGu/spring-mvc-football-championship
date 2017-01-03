@@ -1,11 +1,14 @@
 package lv.ag12098.dao;
 
-import lv.ag12098.entity.GameEntity;
-import lv.ag12098.entity.GameRefereesEntity;
+import lv.ag12098.entity.*;
+import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
 import java.math.BigInteger;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @Named
 @Transactional
@@ -14,7 +17,7 @@ public class GameRefereesDAOImpl extends AbstractBaseDAOImpl<GameRefereesEntity>
 
         //unikālais automašīnas ieraksts pēc ID - implementācija
         @Override
-        public GameRefereesEntity getGameRefereeById (Long refereeId){
+        public GameRefereesEntity getGameRefereeById (int refereeId){
                 return (GameRefereesEntity) currentSession()
                         .createQuery("from " + entityName() + " where id = :refereeId ")
                         .setParameter("refereeId", refereeId)
@@ -28,5 +31,63 @@ public class GameRefereesDAOImpl extends AbstractBaseDAOImpl<GameRefereesEntity>
                         .uniqueResult();
 
                 return nextSeq.longValue();
+        }
+
+        public List<BestRefereesEntity> getAllRefereeData() {
+            List<BestRefereesEntity> refereeList =  currentSession()
+                    .createSQLQuery("select * from (\n" +
+                            "select gr.referee_name || ' ' || gr.referee_surname as fullname, gr.referee_name as name, gr.referee_surname as surname, count(*) penalties\n" +
+                            "  from game_referees gr\n" +
+                            "  join game_referees_link grl on grl.referee_id = gr.id\n" +
+                            "  join game gm on gm.id = grl.game_id\n" +
+                            "  join game_penalties gp on gp.game_id = gm.id\n" +
+                            " where referee_type = :refereeType\n" +
+                            " group by gr.referee_name || ' ' || gr.referee_surname, gr.referee_name, gr.referee_surname) a \n" +
+                            " order by penalties desc;")
+                    .addEntity(BestRefereesEntity.class)
+                    .setParameter("refereeType", "T")
+                    .list();
+
+            int index = 0;
+            for (BestRefereesEntity referee : refereeList) {
+                referee.setRefereesEntity(getGameRefereeByNameAndSurname(referee.getName(), referee.getSurname(), "T"));
+                refereeList.set(index, referee);
+                index++;
+            }
+
+            // sort by penalties given (goals = penalties)
+            Collections.sort(refereeList, new Comparator<BestRefereesEntity>(){
+                public int compare(BestRefereesEntity o1, BestRefereesEntity o2){
+                    if(o1.getPenalties() == o2.getPenalties())
+                        return 0;
+                    return o1.getPenalties() < o2.getPenalties() ? 1 : -1;
+                }
+            });
+
+            if (refereeList == null) return null;
+            else return refereeList;
+        }
+
+        public GameRefereesEntity getGameRefereeByNameAndSurname(String name, String surname, String refereeType) {
+            return (GameRefereesEntity) currentSession()
+                    .createQuery("from " + entityName() + " where referee_name = :name and referee_surname = :surname and referee_type = :refereeType")
+                    .setParameter("name", name)
+                    .setParameter("surname", surname)
+                    .setParameter("refereeType", refereeType)
+                    .uniqueResult();
+        }
+
+        public boolean exists (String name, String surname, String refereeType) {
+            Query query = currentSession().createQuery("select count(*) from " + entityName() +
+                    " where referee_name = :name and referee_surname = :surname and referee_type = :refereeType");
+
+            query.setParameter("name", name);
+            query.setParameter("surname", surname);
+            query.setParameter("refereeType", refereeType);
+
+            Long count = (Long) query.uniqueResult();
+
+            if (count > 0) return true;
+            else return false;
         }
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "game_referees", schema = "public", catalog = "football_champ")
 public class GameRefereesEntity {
     private int id;
-    private int gameId;
+    //private int gameId;
     private String refereeType;
     private String refereeName;
     private String refereeSurname;
@@ -25,6 +25,7 @@ public class GameRefereesEntity {
         this.id = id;
     }
 
+    /*
     @Basic
     @Column(name = "game_id")
     public int getGameId() {
@@ -34,6 +35,7 @@ public class GameRefereesEntity {
     public void setGameId(int gameId) {
         this.gameId = gameId;
     }
+    */
 
     @Basic
     @Column(name = "referee_type")
@@ -73,7 +75,7 @@ public class GameRefereesEntity {
         GameRefereesEntity that = (GameRefereesEntity) o;
 
         if (id != that.id) return false;
-        if (gameId != that.gameId) return false;
+       // if (gameId != that.gameId) return false;
         if (refereeType != null ? !refereeType.equals(that.refereeType) : that.refereeType != null) return false;
         if (refereeName != null ? !refereeName.equals(that.refereeName) : that.refereeName != null) return false;
         if (refereeSurname != null ? !refereeSurname.equals(that.refereeSurname) : that.refereeSurname != null)
@@ -85,7 +87,7 @@ public class GameRefereesEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + gameId;
+       // result = 31 * result + gameId;
         result = 31 * result + (refereeType != null ? refereeType.hashCode() : 0);
         result = 31 * result + (refereeName != null ? refereeName.hashCode() : 0);
         result = 31 * result + (refereeSurname != null ? refereeSurname.hashCode() : 0);

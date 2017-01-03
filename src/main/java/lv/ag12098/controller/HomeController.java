@@ -4,10 +4,7 @@ import lv.ag12098.ChampionshipDataParser;
 import lv.ag12098.dao.GameRefereesDAO;
 import lv.ag12098.dao.TeamDAO;
 import lv.ag12098.dao.TeamPlayersDAO;
-import lv.ag12098.entity.BestPlayersEntity;
-import lv.ag12098.entity.GameRefereesEntity;
-import lv.ag12098.entity.TeamEntity;
-import lv.ag12098.entity.TeamPlayersEntity;
+import lv.ag12098.entity.*;
 import org.hibernate.pretty.MessageHelper;
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
@@ -20,6 +17,7 @@ import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -71,6 +69,29 @@ public class HomeController {
         return teamsList;
     }
 
+    private List<TeamPlayersEntity> getTeamPlayerPenalties(List<TeamPlayersEntity> allTeamPlayers) {
+        List<TeamPlayersEntity> mostPenalties = new ArrayList<>();
+
+        int index = 0;
+        for (TeamPlayersEntity player : allTeamPlayers) {
+            int playerPenalties = teamPlayersDAO.getPlayerPenalties(player);
+            player.setPenaltyCount(playerPenalties);
+            allTeamPlayers.set(index, player);
+            index++;
+        }
+
+        Collections.sort(allTeamPlayers, new Comparator<TeamPlayersEntity>(){
+            public int compare(TeamPlayersEntity o1, TeamPlayersEntity o2){
+                if(o1.getPenaltyCount() == o2.getPenaltyCount())
+                    return 0;
+                return o1.getPenaltyCount() < o2.getPenaltyCount() ? 1 : -1;
+            }
+        });
+
+        if (allTeamPlayers.size() == 0) return null;
+        else return allTeamPlayers.subList(0,10);
+    }
+
     @RequestMapping(value={"", "/", "/home", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         //atgriež sakuma lapu
@@ -82,13 +103,18 @@ public class HomeController {
 
         List<TeamEntity> teamsList = teamDAO.findAll();
         List<BestPlayersEntity> playerList = teamPlayersDAO.getFirstBest(10);
-        List<GameRefereesEntity> refereeList = gameRefereesDAO.findAll();
+        List<BestPlayersEntity> bestGoalkeepers = teamPlayersDAO.getFirstBestGoalkeepers(5);
+        List<BestRefereesEntity> refereeList = gameRefereesDAO.getAllRefereeData();
+        List<TeamPlayersEntity> worstPlayers = teamPlayersDAO.findAll();
 
+        worstPlayers = getTeamPlayerPenalties(worstPlayers);
         getTeamPointsOT(teamsList);
 
         model.addAttribute("teams", teamsList);
         model.addAttribute("players", playerList);
+        model.addAttribute("goalKeepers", bestGoalkeepers);
         model.addAttribute("referees", refereeList);
+        model.addAttribute("worstPlayers", worstPlayers);
 
         return "static/championship-table";
     }
@@ -99,14 +125,19 @@ public class HomeController {
         champ.parseJsonFile();
 
         List<TeamEntity> teamsList = teamDAO.findAll();
-        getTeamPointsOT(teamsList);
-
         List<BestPlayersEntity> playerList = teamPlayersDAO.getFirstBest(10);
-        List<GameRefereesEntity> refereeList = gameRefereesDAO.findAll();
+        List<BestPlayersEntity> bestGoalkeepers = teamPlayersDAO.getFirstBestGoalkeepers(5);
+        List<BestRefereesEntity> refereeList = gameRefereesDAO.getAllRefereeData();
+        List<TeamPlayersEntity> allTeamPlayers = teamPlayersDAO.findAll();
+
+        getTeamPlayerPenalties(allTeamPlayers);
+        getTeamPointsOT(teamsList);
 
         model.addAttribute("teams", teamsList);
         model.addAttribute("players", playerList);
+        model.addAttribute("goalKeepers", bestGoalkeepers);
         model.addAttribute("referees", refereeList);
+        model.addAttribute("allPlayers", allTeamPlayers);
 
         if (teamsList.size() > 0)
             redirectAttributes.addFlashAttribute("successMsg", "Dati veiksmīgi ielādēti sistēmā!");

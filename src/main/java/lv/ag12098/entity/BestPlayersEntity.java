@@ -12,9 +12,11 @@ public class BestPlayersEntity {
     private int id;
     private int goals;
     private int assists;
+    private Double goalRatio;
 
     private TeamPlayersEntity teamPlayer;
     private TeamEntity teamEntity;
+    private GameRefereesEntity refereesEntity;
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
@@ -27,7 +29,7 @@ public class BestPlayersEntity {
     }
 
     @Basic
-    @Column(name = "goals")
+    @Column(name = "goals", nullable = true)
     public int getGoals() {
         return goals;
     }
@@ -37,7 +39,7 @@ public class BestPlayersEntity {
     }
 
     @Basic
-    @Column(name = "assists")
+    @Column(name = "assists", nullable = true)
     public int getAssists() {
         return assists;
     }
@@ -61,6 +63,43 @@ public class BestPlayersEntity {
     }
 
     public void setTeamEntity(TeamEntity teamEntity) {
+        this.teamEntity = teamEntity;
+    }
+
+    public BestPlayersEntity() {
+
+    }
+
+    @Transient
+    public Double getGoalRatio() {
+        return goalRatio;
+    }
+
+    public void setGoalRatio(Double goalRatio) {
+        this.goalRatio = goalRatio;
+    }
+
+    @Transient
+    public GameRefereesEntity getRefereesEntity() {
+        return refereesEntity;
+    }
+
+    public void setRefereesEntity(GameRefereesEntity refereesEntity) {
+        this.refereesEntity = refereesEntity;
+    }
+
+    public BestPlayersEntity(int id, int goals, GameRefereesEntity refereesEntity) {
+        this.id = id;
+        this.goals = goals;
+        this.refereesEntity = refereesEntity;
+    }
+
+    public BestPlayersEntity(int id, int goals, int assists, Double goalRatio, TeamPlayersEntity teamPlayer, TeamEntity teamEntity) {
+        this.id = id;
+        this.goals = goals;
+        this.assists = assists;
+        this.goalRatio = goalRatio;
+        this.teamPlayer = teamPlayer;
         this.teamEntity = teamEntity;
     }
 }

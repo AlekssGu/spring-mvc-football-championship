@@ -17,7 +17,7 @@ public class TeamDAOImpl extends AbstractBaseDAOImpl<TeamEntity>
 
     //unikālais automašīnas ieraksts pēc ID - implementācija
     @Override
-    public TeamEntity getTeamById (Long teamId){
+    public TeamEntity getTeamById (int teamId){
         return (TeamEntity) currentSession()
                 .createQuery("from " + entityName() + " where id = :teamId ")
                 .setParameter("teamId", teamId)

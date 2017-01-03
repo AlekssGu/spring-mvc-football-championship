@@ -28,6 +28,9 @@ public class ChampionshipDataParser {
     GameRefereesDAO gameRefereesDAO;
 
     @Inject
+    GameRefereesLinkDAO gameRefereesLinkDAO;
+
+    @Inject
     TeamDAO teamDAO;
 
     @Inject
@@ -52,13 +55,13 @@ public class ChampionshipDataParser {
     {
         List<URL> jsonFiles = new ArrayList<URL>();
 
-        jsonFiles.add(0, ChampionshipDataParser.class.getResource("/championship-data/FirstRound/futbols0.json"));
-        jsonFiles.add(1, ChampionshipDataParser.class.getResource("/championship-data/FirstRound/futbols1.json"));
-        jsonFiles.add(2, ChampionshipDataParser.class.getResource("/championship-data/FirstRound/futbols2.json"));
+        jsonFiles.add(0, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols0.json"));
+        jsonFiles.add(1, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols1.json"));
+        jsonFiles.add(2, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols2.json"));
 
-        jsonFiles.add(3, ChampionshipDataParser.class.getResource("/championship-data/SecondRound/futbols0.json"));
-        jsonFiles.add(4, ChampionshipDataParser.class.getResource("/championship-data/SecondRound/futbols1.json"));
-        jsonFiles.add(5, ChampionshipDataParser.class.getResource("/championship-data/SecondRound/futbols2.json"));
+        jsonFiles.add(3, ChampionshipDataParser.class.getResource("/championship-data/JSONSecondRound/futbols0.json"));
+        jsonFiles.add(4, ChampionshipDataParser.class.getResource("/championship-data/JSONSecondRound/futbols1.json"));
+        jsonFiles.add(5, ChampionshipDataParser.class.getResource("/championship-data/JSONSecondRound/futbols2.json"));
 
         return jsonFiles;
     }
@@ -518,36 +521,61 @@ public class ChampionshipDataParser {
     {
         String key = null;
         Iterator keys = null;
+        GameRefereesEntity gameRefereesEntity = null;
 
         try {
             System.out.println("Līnijtiesneši");
             for (int i = 0; i < linesmen.length(); i++) {
                 JSONObject row = linesmen.getJSONObject(i);
-                GameRefereesEntity gameRefereesEntity = new GameRefereesEntity();
-                gameRefereesEntity.setRefereeName(row.getString("Vards"));
-                gameRefereesEntity.setRefereeSurname(row.getString("Uzvards"));
-                gameRefereesEntity.setGameId(gameEntity.getId());
-                gameRefereesEntity.setRefereeType("VT");
-                gameRefereesDAO.save(gameRefereesEntity);
 
-                System.out.println("    Uzvards: " + row.getString("Uzvards"));
-                System.out.println("    Vards: " + row.getString("Vards"));
+                String name = row.getString("Vards");
+                String surname = row.getString("Uzvards");
+                String refereeType = "VT";
+
+                // if not exists, create new referee
+                if (!gameRefereesDAO.exists(name, surname, refereeType)) {
+                    gameRefereesEntity = new GameRefereesEntity();
+                    gameRefereesEntity.setRefereeName(name);
+                    gameRefereesEntity.setRefereeSurname(surname);
+                    gameRefereesEntity.setRefereeType(refereeType);
+                    gameRefereesDAO.save(gameRefereesEntity);
+                } else {
+                    gameRefereesEntity = gameRefereesDAO.getGameRefereeByNameAndSurname(name, surname, refereeType);
+                }
+
+                // izveido ierakstu link tabulā, ka ir tiesājis šo spēli
+                GameRefereesLinkEntity gameRefereesLinkEntity = new GameRefereesLinkEntity();
+                gameRefereesLinkEntity.setGameId(gameEntity.getId());
+                gameRefereesLinkEntity.setRefereeId(gameRefereesEntity.getId());
+                gameRefereesLinkDAO.save(gameRefereesLinkEntity);
+
+                System.out.println("    Uzvards: " + surname);
+                System.out.println("    Vards: " + name);
             }
 
             System.out.println("Vecākais tiesnesis");
 
-            GameRefereesEntity gameRefereesEntity = new GameRefereesEntity();
-            gameRefereesEntity.setRefereeName(referee.getString("Vards"));
-            gameRefereesEntity.setRefereeSurname(referee.getString("Uzvards"));
-            gameRefereesEntity.setGameId(gameEntity.getId());
-            gameRefereesEntity.setRefereeType("T");
-            gameRefereesDAO.save(gameRefereesEntity);
+            String name = referee.getString("Vards");
+            String surname = referee.getString("Uzvards");
+            String refereeType = "T";
 
-            keys = referee.keys();
-            while (keys.hasNext()) {
-                key = (String) keys.next();
-                System.out.println("    " + key + ": " + referee.getString(key));
+            // if not exists, create new referee
+            if (!gameRefereesDAO.exists(name, surname, refereeType)) {
+                gameRefereesEntity = new GameRefereesEntity();
+                gameRefereesEntity.setRefereeName(name);
+                gameRefereesEntity.setRefereeSurname(surname);
+                gameRefereesEntity.setRefereeType(refereeType);
+                gameRefereesDAO.save(gameRefereesEntity);
+            } else {
+                gameRefereesEntity = gameRefereesDAO.getGameRefereeByNameAndSurname(name, surname, refereeType);
             }
+
+            // izveido ierakstu link tabulā, ka ir tiesājis šo spēli
+            GameRefereesLinkEntity gameRefereesLinkEntity = new GameRefereesLinkEntity();
+            gameRefereesLinkEntity.setGameId(gameEntity.getId());
+            gameRefereesLinkEntity.setRefereeId(gameRefereesEntity.getId());
+            gameRefereesLinkDAO.save(gameRefereesLinkEntity);
+
         } catch (Exception e) {
             System.out.println("[ERROR] Kļūda, apstrādājot tiesnešu datus:");
             e.printStackTrace();

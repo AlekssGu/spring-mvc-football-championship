@@ -13,6 +13,10 @@ public interface TeamPlayersDAO extends AbstractBaseDAO<TeamPlayersEntity> {
     TeamPlayersEntity findByPlayerNumber(Integer playerNumber, TeamEntity teamEntity);
     TeamEntity findPlayersTeam(int teamPlayerId);
 
+    Integer getPlayerGoalsLost(TeamPlayersEntity teamPlayersEntity);
+    Integer getPlayerPenalties(TeamPlayersEntity teamPlayersEntity);
+
+    List<BestPlayersEntity> getFirstBestGoalkeepers(Integer limit);
     List<BestPlayersEntity> getFirstBest(Integer limit);
     boolean exists(String teamPlayerName, String teamPlayerSurname, TeamEntity teamEntity);
 

@@ -1,6 +1,6 @@
 package lv.ag12098.dao;
 
-import lv.ag12098.entity.GameEntity;
+import lv.ag12098.entity.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
@@ -30,7 +30,7 @@ public class GameDAOImpl extends AbstractBaseDAOImpl<GameEntity>
 
                 return nextSeq.intValue();
         }
-        //automašīnu meklēšana pēc markas - implementācija
+
         @Override
         public  List<GameEntity> findGameByDate (Date date){
                 return (List<GameEntity>) currentSession()
@@ -40,6 +40,31 @@ public class GameDAOImpl extends AbstractBaseDAOImpl<GameEntity>
                         .addEntity(GameEntity.class)
                         .setParameter("date", date)
                         .list();
+        }
+
+        public Integer countAllGamesWherePlayerPlayed(TeamPlayersEntity teamPlayersEntity) {
+            List<BestPlayersEntity> goalkeeperList = currentSession()
+                                                    .createSQLQuery("select player_id as id, count(*) as goals, 0 as assists \n" +
+                                                            "  from players_on_field\n" +
+                                                            " where player_id = :playerId\n" +
+                                                            " group by player_id;")
+                                                    .addEntity(BestPlayersEntity.class)
+                                                    .setParameter("playerId", teamPlayersEntity.getId())
+                                                    .list();
+
+            if (goalkeeperList == null) return 0;
+            else return goalkeeperList.get(0).getGoals();
+        }
+
+        public List<GameEntity> findAllWhereTeamPlayed(TeamEntity teamEntity) {
+            return (List<GameEntity>) currentSession()
+                    .createSQLQuery("select * " +
+                            "from game " +
+                            "where (team_home_id = :homeId or team_guest_id = :guestId")
+                    .addEntity(GameEntity.class)
+                    .setParameter("homeId", teamEntity.getId())
+                    .setParameter("guestId", teamEntity.getId())
+                    .list();
         }
 
         public GameEntity findLast() {

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TeamDAO extends AbstractBaseDAO<TeamEntity> {
 
-    TeamEntity getTeamById(Long teamId);
+    TeamEntity getTeamById(int teamId);
     TeamEntity getTeamByName(String teamName);
 
     Integer getGamesWonOT(Integer teamId);

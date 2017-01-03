@@ -7,7 +7,6 @@ import lv.ag12098.entity.GameRefereesEntity;
  */
 public class GameRefereesDTO {
     private int id;
-    private int gameId;
     private String refereeType;
     private String refereeName;
     private String refereeSurname;
@@ -18,14 +17,6 @@ public class GameRefereesDTO {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
     }
 
     public String getRefereeType() {
@@ -54,7 +45,6 @@ public class GameRefereesDTO {
 
     public GameRefereesDTO(GameRefereesEntity entity) {
         this.id = entity.getId();
-        this.gameId = entity.getGameId();
         this.refereeType = entity.getRefereeType();
         this.refereeName = entity.getRefereeName();
         this.refereeSurname = entity.getRefereeSurname();

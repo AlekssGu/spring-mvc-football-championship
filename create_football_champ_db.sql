@@ -20,6 +20,7 @@ CREATE SEQUENCE goal_assists_seq;
 CREATE SEQUENCE players_on_field_seq;
 CREATE SEQUENCE team_seq;
 CREATE SEQUENCE team_players_seq;
+CREATE SEQUENCE game_referees_link_seq;
 
 -- drop table game CASCADE;    
     
@@ -43,9 +44,18 @@ CREATE TABLE game (
 
 CREATE TABLE best_players (
     id Integer NOT NULL, 
-    goals Integer NOT NULL,
-    assists Integer NOT NULL
+    goals Integer DEFAULT 0,
+    assists Integer DEFAULT 0
 );
+
+-- drop table best_referees;
+
+    CREATE TABLE best_referees (
+        fullname varchar(50) NOT NULL,
+        name varchar(50) NOT NULL, 
+        surname varchar(50) NOT NULL, 
+        penalties Integer DEFAULT 0
+    );
 
 -- drop table game_penalties;
 
@@ -118,12 +128,23 @@ CREATE TABLE goal_assists (
 
 CREATE TABLE game_referees (
   	id Integer NOT NULL DEFAULT nextval('game_referees_seq'),
-    game_id Integer NOT NULL,
+--    game_id Integer NOT NULL,
     referee_type varchar(20), -- VT / T
     referee_name varchar(50),
     referee_surname varchar(50),
-    PRIMARY KEY (id),
-    FOREIGN KEY (game_id) REFERENCES game (id)
+    PRIMARY KEY (id)
+  --  FOREIGN KEY (game_id) REFERENCES game (id)
+);    
+
+-- drop table game_referees_link;
+
+CREATE TABLE game_referees_link (
+    id Integer NOT NULL DEFAULT nextval('game_seq'),
+    game_id Integer NOT NULL,
+    referee_id Integer NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (game_id) REFERENCES game(id),
+    FOREIGN KEY (referee_id) REFERENCES game_referees(id)
 );    
 
 -- drop table team_players CASCADE;

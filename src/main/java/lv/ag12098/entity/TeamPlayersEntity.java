@@ -15,6 +15,10 @@ public class TeamPlayersEntity {
     private String name;
     private String surname;
 
+    private int penaltyCount;
+    private int yellowCardCount;
+    private int redCardCount;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -74,6 +78,33 @@ public class TeamPlayersEntity {
 
     public void setPlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
+    }
+
+    @Transient
+    public int getPenaltyCount() {
+        return penaltyCount;
+    }
+
+    public void setPenaltyCount(int penaltyCount) {
+        this.penaltyCount = penaltyCount;
+    }
+
+    @Transient
+    public int getYellowCardCount() {
+        return yellowCardCount;
+    }
+
+    public void setYellowCardCount(int yellowCardCount) {
+        this.yellowCardCount = yellowCardCount;
+    }
+
+    @Transient
+    public int getRedCardCount() {
+        return redCardCount;
+    }
+
+    public void setRedCardCount(int redCardCount) {
+        this.redCardCount = redCardCount;
     }
 
     @Override
