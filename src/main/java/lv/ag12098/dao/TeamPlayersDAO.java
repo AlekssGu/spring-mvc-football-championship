@@ -13,6 +13,10 @@ public interface TeamPlayersDAO extends AbstractBaseDAO<TeamPlayersEntity> {
     TeamPlayersEntity findByPlayerNumber(Integer playerNumber, TeamEntity teamEntity);
     TeamEntity findPlayersTeam(int teamPlayerId);
 
+    List<TeamPlayersEntity> findAllTeamPlayers(int teamId);
+
+    Integer getPlayerGamesCount(int teamPlayerId, String mode);
+    double getPlayerMinutes(int teamPlayerId);
     Integer getPlayerGoalsLost(TeamPlayersEntity teamPlayersEntity);
     Integer getPlayerPenalties(TeamPlayersEntity teamPlayersEntity);
 

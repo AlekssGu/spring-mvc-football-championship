@@ -9,13 +9,16 @@ import org.hibernate.pretty.MessageHelper;
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +42,14 @@ public class HomeController {
 
     @Inject
     GameRefereesDAO gameRefereesDAO;
+
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 
     private List<TeamEntity> getTeamPointsOT(List<TeamEntity> teamsList) {
         // Sakārtojam punktu secībā
@@ -117,6 +128,61 @@ public class HomeController {
         model.addAttribute("worstPlayers", worstPlayers);
 
         return "static/championship-table";
+    }
+
+    @RequestMapping(value = "/teamStatistics", params = {"id", "action"}, method = RequestMethod.GET)
+    public String teamStatistics(Model model
+                                , @RequestParam(value = "id") String teamId
+                                , @RequestParam(value = "action") String action
+                                , HttpServletRequest request) {
+        try {
+            // parameters
+            int teamIdValue = Integer.valueOf(teamId);
+            String refererURI = new URI(request.getHeader("Referer")).getPath();
+
+            // gather data
+            TeamEntity teamData = teamDAO.getTeamById(teamIdValue);
+            List<TeamPlayersEntity> allPlayers = teamPlayersDAO.findAllTeamPlayers(teamIdValue);
+
+            int index = 0;
+            for (TeamPlayersEntity player : allPlayers) {
+                switch (player.getPosition()) {
+                    case "U":
+                        player.setPosition("Uzbrucējs");
+                        break;
+                    case "V":
+                        player.setPosition("Vārtsargs");
+                        break;
+                    case "A":
+                        player.setPosition("Aizsargs");
+                        break;
+                    default:
+                        break;
+                }
+
+                player.setGameCountMain(teamPlayersDAO.getPlayerGamesCount(player.getId(),"main"));
+                player.setGameCountTotal(teamPlayersDAO.getPlayerGamesCount(player.getId(),"total"));
+                player.setMinutesPlayed(round(teamPlayersDAO.getPlayerMinutes(player.getId()),2));
+                allPlayers.set(index,player);
+                index++;
+            }
+
+            model.addAttribute("teamData", teamData);
+            model.addAttribute("allTeamPlayers",allPlayers);
+            model.addAttribute("goBack", refererURI);
+
+            // @TODO:
+            // nospēlēto spēļu skaitu (nospēlēto spēļu skaits pamatsastāvā)
+            // nospēlētās minūtes
+            // iesisto vārtu
+            // rezultatīvo piespēļu skaits
+            // saņemtās dzeltenās kartītes
+            // saņemtās sarkanās kartītes
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "static/error404";
+        }
+        return "static/team-statistics";
     }
 
     @RequestMapping(value = "/load-data", method = RequestMethod.GET)

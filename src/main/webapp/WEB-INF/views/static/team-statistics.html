@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="lv" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/fragments/head :: head"></head>
+<body>
+    <nav th:replace="templates/fragments/navbar :: navbar"></nav>
+    <div class="container-fluid">
+
+        <div th:if="${successMsg}" class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div th:replace="templates/fragments/alert :: alert (type='success', message=${successMsg})">...</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-default" th:href="${goBack}"><span class="glyphicon glyphicon-chevron-left"></span> Atpakaļ</a>
+                <h1 class="text-center" th:text="${teamData.teamName}"></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive well">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Nr.p.k.</th>
+                        <th>Vārds</th>
+                        <th>Uzvārds</th>
+                        <th>Spēlētāja numurs</th>
+                        <th>Loma</th>
+                        <th>Spēļu skaits (Pamatsastāvā)</th>
+                        <th>Minūtes</th>
+                        <th>Vārtu skaits</th>
+                        <th>Piespēļu skaits</th>
+                        <th>Sodi (DZK/SK)</th>
+                        </thead>
+                        <tbody class="">
+                        <th:block th:each="player, iterStat : ${allTeamPlayers}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${player.name}"></td>
+                                <td th:text="${player.surname}"></td>
+                                <td th:text="${player.playerNumber}"></td>
+                                <td th:text="${player.position}"></td>
+                                <td th:text="${player.gameCountTotal + ' (' + player.gameCountMain + ')'}"></td>
+                                <td th:text="${player.minutesPlayed}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="templates/fragments/footer :: footer"></footer>
+</body>
+</html>

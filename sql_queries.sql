@@ -13,7 +13,38 @@ select team_id, player_number, count(*)
   from team_players tp
   group by team_id, player_number;
  
-select * from team_players where team_id = 310 and player_number in (37, 96); 
+ 
+ 
+select * from players_on_field where EXTRACT(MINUTE FROM time_on) > 0 OR EXTRACT(SECOND FROM TIME_ON) > 0;
+select time_on, time_off, extract(minute from time_off) - extract(minute from time_on) from players_on_field where player_id = 4461;
+
+CREATE OR REPLACE FUNCTION get_game_length (integer) RETURNS real AS $$
+DECLARE
+  v_game_id ALIAS FOR $1;
+  v_max_goal_time timestamp;
+  v_seconds real;
+  v_minutes real;
+  v_minutes_total real;
+  v_hours real;
+BEGIN
+    SELECT max(gg.goal_time)
+      INTO v_max_goal_time
+      FROM game g
+      JOIN game_goals gg ON gg.game_id = g.id
+     WHERE g.id = v_game_id;
+      
+    v_hours := extract(hour from v_max_goal_time);  
+    v_minutes := extract(minute from v_max_goal_time);
+    v_seconds := extract(second from v_max_goal_time);
+    
+    v_minutes_total := (v_hours * 60) + v_minutes + (v_seconds/60);
+    
+    IF v_minutes_total > 60 THEN
+    	RETURN v_minutes_total;
+    ELSE
+    	RETURN 60;
+END;
+$$ LANGUAGE plpgsql;
 
 select * 
   from team t

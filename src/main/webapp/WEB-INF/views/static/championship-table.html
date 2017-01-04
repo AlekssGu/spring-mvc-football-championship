@@ -18,7 +18,7 @@
                     <table class="table table-striped">
                         <thead>
                         <th>Vieta</th>
-                        <th>Komandas nosaukums</th>
+                        <th>Komandas nosaukums <span class="glyphicon glyphicon-info-sign" title="Uzspied uz komandas nosaukuma, lai apskatītos detalizētāku informāciju"></span></th>
                         <th>Spēles</th>
                         <th>Uzvaras (P)</th>
                         <th>Zaudējumi (P)</th>
@@ -31,7 +31,7 @@
                         <th:block th:each="team, iterStat : ${teams}">
                             <tr>
                                 <td th:text="${iterStat.count + '.'}"></td>
-                                <td><a th:href="@{/teamStatistics(id=${team.id}, action='show_all')}" th:text="${team.teamName}"></a></td>
+                                <td><a th:href="@{/teamStatistics/(id=${team.id}, action='show_all')}" th:text="${team.teamName}"></a></td>
                                 <td th:text="${team.gameCount}"></td>
                                 <td th:text="${team.gamesWon + ' (' + team.gamesWonOT + ')'}"></td>
                                 <td th:text="${team.gamesLost + ' (' + team.gamesLostOT + ')'}"></td>
@@ -40,7 +40,6 @@
                                 <td th:text="${team.goalsRelation}"></td>
                                 <td th:text="${team.totalPoints}"></td>
                             </tr>
-                            </a>
                         </th:block>
                         </tbody>
                     </table>

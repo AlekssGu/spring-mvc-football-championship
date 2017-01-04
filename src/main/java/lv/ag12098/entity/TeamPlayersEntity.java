@@ -18,6 +18,11 @@ public class TeamPlayersEntity {
     private int penaltyCount;
     private int yellowCardCount;
     private int redCardCount;
+    private int gameCountTotal;
+    private int gameCountMain;
+    private double minutesPlayed;
+    private int goalsScored;
+    private int assistsMade;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,6 +110,51 @@ public class TeamPlayersEntity {
 
     public void setRedCardCount(int redCardCount) {
         this.redCardCount = redCardCount;
+    }
+
+    @Transient
+    public int getGameCountTotal() {
+        return gameCountTotal;
+    }
+
+    public void setGameCountTotal(int gameCountTotal) {
+        this.gameCountTotal = gameCountTotal;
+    }
+
+    @Transient
+    public int getGameCountMain() {
+        return gameCountMain;
+    }
+
+    public void setGameCountMain(int gameCountMain) {
+        this.gameCountMain = gameCountMain;
+    }
+
+    @Transient
+    public double getMinutesPlayed() {
+        return minutesPlayed;
+    }
+
+    public void setMinutesPlayed(double minutesPlayed) {
+        this.minutesPlayed = minutesPlayed;
+    }
+
+    @Transient
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
+    }
+
+    @Transient
+    public int getAssistsMade() {
+        return assistsMade;
+    }
+
+    public void setAssistsMade(int assistsMade) {
+        this.assistsMade = assistsMade;
     }
 
     @Override

@@ -209,4 +209,50 @@ public class TeamPlayersDAOImpl extends AbstractBaseDAOImpl<TeamPlayersEntity>
             if (playerPenalties == null) return 0;
             else return playerPenalties.size();
         }
+
+        public List<TeamPlayersEntity> findAllTeamPlayers(int teamId) {
+            List<TeamPlayersEntity> allPlayers =  currentSession()
+                    .createSQLQuery("select tp.*\n" +
+                            "  from team_players tp \n" +
+                            " where tp.team_id = :teamId\n" +
+                            " order by tp.player_number")
+                    .addEntity(TeamPlayersEntity.class)
+                    .setParameter("teamId", teamId)
+                    .list();
+
+            return allPlayers;
+        }
+
+        public Integer getPlayerGamesCount(int teamPlayerId, String mode) {
+            String queryString = "";
+
+            if (mode == "main")
+                queryString = "select pf.* \n" +
+                        "from players_on_field pf \n" +
+                        "where (EXTRACT(MINUTE FROM time_on) = 0 \n" +
+                        "or EXTRACT(SECOND FROM time_on) = 0) \n" +
+                        "and player_id = " + teamPlayerId;
+            else if (mode == "total")
+                queryString = "select pf.* \n" +
+                        "from players_on_field pf \n" +
+                        "where player_id = " + teamPlayerId;
+
+
+            List<PlayersOnFieldEntity> playersOnFieldEntityList =  currentSession()
+                    .createSQLQuery(queryString)
+                    .addEntity(PlayersOnFieldEntity.class)
+                    .list();
+
+            if (playersOnFieldEntityList == null) return 0;
+            else return playersOnFieldEntityList.size();
+        }
+
+        public double getPlayerMinutes(int teamPlayerId) {
+            List result = currentSession()
+                    .createSQLQuery("select get_player_minutes_sum(" + teamPlayerId + ") minutes")
+                    .list();
+
+            if (result == null) return 0;
+            else return Double.valueOf((float) result.get(0));
+        }
 }
