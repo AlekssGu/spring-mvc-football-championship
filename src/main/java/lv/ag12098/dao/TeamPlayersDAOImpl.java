@@ -255,4 +255,49 @@ public class TeamPlayersDAOImpl extends AbstractBaseDAOImpl<TeamPlayersEntity>
             if (result == null) return 0;
             else return Double.valueOf((float) result.get(0));
         }
+
+        public Integer getPlayerGoalsScored(int teamPlayerId) {
+            List<TeamPlayersEntity> playerGoals =  currentSession()
+                    .createSQLQuery("select tp.* \n" +
+                            "  from game_goals gg\n" +
+                            "  join team t on t.id = gg.team_id\n" +
+                            "  join team_players tp on tp.team_id = t.id and tp.player_number = gg.player_number\n" +
+                            " where tp.id = " + teamPlayerId)
+                    .addEntity(TeamPlayersEntity.class)
+                    .list();
+
+            if (playerGoals == null) return 0;
+            else return playerGoals.size();
+        }
+
+        public Integer getPlayerGoalAssists(int teamPlayerId) {
+            List<TeamPlayersEntity> playerGoals =  currentSession()
+                    .createSQLQuery("select tp.* \n" +
+                            "  from game_goals gg\n" +
+                            "  join goal_assists ga on ga.goal_id = gg.id\n" +
+                            "  join team t on t.id = gg.team_id\n" +
+                            "  join team_players tp on tp.team_id = t.id and tp.player_number = ga.player_number\n" +
+                            " where tp.id = " + teamPlayerId)
+                    .addEntity(TeamPlayersEntity.class)
+                    .list();
+
+            if (playerGoals == null) return 0;
+            else return playerGoals.size();
+        }
+
+        public Integer getPlayerPenaltyByType(int teamPlayerId, String cardType) {
+            int type = 0;
+
+            if(cardType == "YELLOW")
+                type = 1;
+            else if(cardType == "RED")
+                type = 2;
+
+            List result = currentSession()
+                    .createSQLQuery("select get_player_penalty_count(" + teamPlayerId + "," + type + ") penalties")
+                    .list();
+
+            if (result == null) return 0;
+            else return Integer.valueOf((int) result.get(0));
+        }
 }

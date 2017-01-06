@@ -9,11 +9,15 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by aleksandrs.gusevs on 2016.12.27..
@@ -55,6 +59,8 @@ public class ChampionshipDataParser {
     {
         List<URL> jsonFiles = new ArrayList<URL>();
 
+
+
         jsonFiles.add(0, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols0.json"));
         jsonFiles.add(1, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols1.json"));
         jsonFiles.add(2, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols2.json"));
@@ -83,7 +89,7 @@ public class ChampionshipDataParser {
                 System.out.println("jsonText = " + jsonText);
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        new FileInputStream(jsonFileUrl.getPath()), "UTF-8"));
+                        new FileInputStream(jsonFileUrl.getPath()), "Cp1252"));
 
                 System.out.println("jsonText = " + jsonText);
 

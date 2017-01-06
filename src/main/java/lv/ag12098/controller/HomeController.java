@@ -163,6 +163,10 @@ public class HomeController {
                 player.setGameCountMain(teamPlayersDAO.getPlayerGamesCount(player.getId(),"main"));
                 player.setGameCountTotal(teamPlayersDAO.getPlayerGamesCount(player.getId(),"total"));
                 player.setMinutesPlayed(round(teamPlayersDAO.getPlayerMinutes(player.getId()),2));
+                player.setGoalsScored(teamPlayersDAO.getPlayerGoalsScored(player.getId()));
+                player.setAssistsMade(teamPlayersDAO.getPlayerGoalAssists(player.getId()));
+                player.setYellowCardCount(teamPlayersDAO.getPlayerPenaltyByType(player.getId(),"YELLOW"));
+                player.setRedCardCount(teamPlayersDAO.getPlayerPenaltyByType(player.getId(),"RED"));
                 allPlayers.set(index,player);
                 index++;
             }

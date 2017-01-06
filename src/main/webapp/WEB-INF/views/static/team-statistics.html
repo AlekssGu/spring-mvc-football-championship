@@ -43,6 +43,9 @@
                                 <td th:text="${player.position}"></td>
                                 <td th:text="${player.gameCountTotal + ' (' + player.gameCountMain + ')'}"></td>
                                 <td th:text="${player.minutesPlayed}"></td>
+                                <td th:text="${player.goalsScored}"></td>
+                                <td th:text="${player.assistsMade}"></td>
+                                <td th:text="${player.yellowCardCount + '/' + player.redCardCount}"></td>
                             </tr>
                         </th:block>
                         </tbody>

@@ -19,6 +19,9 @@ public interface TeamPlayersDAO extends AbstractBaseDAO<TeamPlayersEntity> {
     double getPlayerMinutes(int teamPlayerId);
     Integer getPlayerGoalsLost(TeamPlayersEntity teamPlayersEntity);
     Integer getPlayerPenalties(TeamPlayersEntity teamPlayersEntity);
+    Integer getPlayerGoalsScored(int teamPlayerId);
+    Integer getPlayerGoalAssists(int teamPlayerId);
+    Integer getPlayerPenaltyByType(int teamPlayerId, String cardType);
 
     List<BestPlayersEntity> getFirstBestGoalkeepers(Integer limit);
     List<BestPlayersEntity> getFirstBest(Integer limit);
