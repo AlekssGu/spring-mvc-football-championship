@@ -5,7 +5,9 @@ import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -15,7 +17,14 @@ import java.util.List;
 public class GameRefereesDAOImpl extends AbstractBaseDAOImpl<GameRefereesEntity>
         implements GameRefereesDAO {
 
-        //unikālais automašīnas ieraksts pēc ID - implementācija
+        private static double round(double value, int places) {
+            if (places < 0) throw new IllegalArgumentException();
+
+            BigDecimal bd = new BigDecimal(value);
+            bd = bd.setScale(places, RoundingMode.HALF_UP);
+            return bd.doubleValue();
+        }
+
         @Override
         public GameRefereesEntity getGameRefereeById (int refereeId){
                 return (GameRefereesEntity) currentSession()
@@ -51,6 +60,13 @@ public class GameRefereesDAOImpl extends AbstractBaseDAOImpl<GameRefereesEntity>
             int index = 0;
             for (BestRefereesEntity referee : refereeList) {
                 referee.setRefereesEntity(getGameRefereeByNameAndSurname(referee.getName(), referee.getSurname(), "T"));
+                referee.setMinutesPlayedAsReferee(
+                        getRefereeTimePlayed(getGameRefereeByNameAndSurname(referee.getName(),referee.getSurname(), "T")
+                                ,"T")
+                );
+                referee.setMinutesPlayedAsLinesman(
+                        getRefereeTimePlayed(getGameRefereeByNameAndSurname(referee.getName(), referee.getSurname(), "T")
+                                ,"VT"));
                 refereeList.set(index, referee);
                 index++;
             }
@@ -89,5 +105,26 @@ public class GameRefereesDAOImpl extends AbstractBaseDAOImpl<GameRefereesEntity>
 
             if (count > 0) return true;
             else return false;
+        }
+
+        public double getRefereeTimePlayed(GameRefereesEntity refereesEntity, String refereeType) {
+            List result = currentSession()
+                    .createSQLQuery("select coalesce(sum(get_game_length(g.id)),0)\n" +
+                            "  from game g\n" +
+                            "  join game_referees_link grl on grl.game_id = g.id\n" +
+                            "  join game_referees gr on gr.id = grl.referee_id\n" +
+                            " where gr.referee_type = :refereeType \n" +
+                            "   and gr.referee_name = :refereeName \n" +
+                            "   and gr.referee_surname = :refereeSurname ;")
+                    .setParameter("refereeName",refereesEntity.getRefereeName())
+                    .setParameter("refereeSurname",refereesEntity.getRefereeSurname())
+                    .setParameter("refereeType",refereeType)
+                    .list();
+
+            if (result == null) return 0;
+            else {
+                double resultVal = (float) result.get(0);
+                return round(resultVal,2);
+            }
         }
 }

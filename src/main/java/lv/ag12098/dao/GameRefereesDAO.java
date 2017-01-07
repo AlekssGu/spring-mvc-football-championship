@@ -12,6 +12,7 @@ public interface GameRefereesDAO extends AbstractBaseDAO<GameRefereesEntity> {
     List<BestRefereesEntity> getAllRefereeData();
     GameRefereesEntity getGameRefereeByNameAndSurname(String name, String surname, String refereeType);
     boolean exists (String name, String surname, String refereeType);
+    double getRefereeTimePlayed(GameRefereesEntity refereesEntity, String refereeType);
     //nākošā sekvence (ID)
     Long getNextSeq();
 

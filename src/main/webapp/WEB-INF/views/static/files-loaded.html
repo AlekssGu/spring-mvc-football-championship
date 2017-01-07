@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="lv" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates/fragments/head :: head"></head>
+<body>
+    <nav th:replace="templates/fragments/navbar :: navbar"></nav>
+    <div class="container-fluid">
+        <div th:if="${successMsg}" class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div th:replace="templates/fragments/alert :: alert (type='success', message=${successMsg})">...</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Ielādētie faili</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="table-responsive well">
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Nr.p.k.</th>
+                        <th>Faila nosaukums</th>
+                        </thead>
+                        <tbody class="">
+                        <th:block th:each="file, iterStat : ${filesLoaded}">
+                            <tr>
+                                <td th:text="${iterStat.count + '.'}"></td>
+                                <td th:text="${file.sourceFile}"></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="templates/fragments/footer :: footer"></footer>
+</body>
+</html>

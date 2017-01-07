@@ -13,6 +13,8 @@ public class BestRefereesEntity {
     private String name;
     private String surname;
     private int penalties;
+    private double minutesPlayedAsReferee;
+    private double minutesPlayedAsLinesman;
 
     private GameRefereesEntity refereesEntity;
 
@@ -56,8 +58,22 @@ public class BestRefereesEntity {
         this.penalties = penalties;
     }
 
-    public BestRefereesEntity() {
+    @Transient
+    public double getMinutesPlayedAsReferee() {
+        return minutesPlayedAsReferee;
+    }
 
+    public void setMinutesPlayedAsReferee(double minutesPlayedAsReferee) {
+        this.minutesPlayedAsReferee = minutesPlayedAsReferee;
+    }
+
+    @Transient
+    public double getMinutesPlayedAsLinesman() {
+        return minutesPlayedAsLinesman;
+    }
+
+    public void setMinutesPlayedAsLinesman(double minutesPlayedAsLinesman) {
+        this.minutesPlayedAsLinesman = minutesPlayedAsLinesman;
     }
 
     @Transient
@@ -67,6 +83,10 @@ public class BestRefereesEntity {
 
     public void setRefereesEntity(GameRefereesEntity refereesEntity) {
         this.refereesEntity = refereesEntity;
+    }
+
+    public BestRefereesEntity() {
+
     }
 
     public BestRefereesEntity(String fullName, String name, String surname, int penalties, GameRefereesEntity refereesEntity) {

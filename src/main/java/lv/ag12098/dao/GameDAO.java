@@ -15,7 +15,7 @@ public interface GameDAO extends AbstractBaseDAO<GameEntity> {
     GameEntity findLast();
     List<GameEntity> findAllWhereTeamPlayed(TeamEntity teamEntity);
     Integer countAllGamesWherePlayerPlayed(TeamPlayersEntity teamPlayersEntity);
-
+    boolean checkSourceFileLoaded(String sourceFilePath);
     //nākošā sekvence (ID)
     Integer getNextSeq();
 

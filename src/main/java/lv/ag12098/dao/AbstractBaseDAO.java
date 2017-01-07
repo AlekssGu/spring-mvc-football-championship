@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface AbstractBaseDAO<T> {
 	void delete(T obj);
+	void deleteAll();
 
 	T find(Integer id);
 

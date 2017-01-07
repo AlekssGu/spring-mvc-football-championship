@@ -72,4 +72,15 @@ public class GameDAOImpl extends AbstractBaseDAOImpl<GameEntity>
                         .createQuery("from " + entityName() + " where id = (SELECT max(id) from " + entityName())
                         .uniqueResult();
         }
+
+        public boolean checkSourceFileLoaded(String sourceFilePath) {
+            List<GameEntity> gameEntities =  currentSession()
+                    .createSQLQuery("select g.* from game g where g.source_file = :sourceFilePath")
+                    .addEntity(GameEntity.class)
+                    .setParameter("sourceFilePath", sourceFilePath)
+                    .list();
+
+            if (gameEntities == null || gameEntities.size() == 0) return false;
+            else return true;
+        }
 }

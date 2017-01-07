@@ -10,15 +10,16 @@ import java.util.Date;
 @Table(name = "game", schema = "public", catalog = "football_champ")
 public class GameEntity {
     private Integer id;
-    private Date gameDate;
     private Integer attendees;
-    private String place;
-    private boolean isOvertime;
     private Integer gameRound;
     private Integer gameSeq;
     private Integer teamHomeId;
     private Integer teamGuestId;
     private Integer teamWonId;
+    private boolean isOvertime;
+    private Date gameDate;
+    private String place;
+    private String sourceFile;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,6 +120,16 @@ public class GameEntity {
 
     public void setTeamWonId(Integer teamWonId) {
         this.teamWonId = teamWonId;
+    }
+
+    @Basic
+    @Column(name = "source_file")
+    public String getSourceFile() {
+        return sourceFile;
+    }
+
+    public void setSourceFile(String sourceFile) {
+        this.sourceFile = sourceFile;
     }
 
     @Override

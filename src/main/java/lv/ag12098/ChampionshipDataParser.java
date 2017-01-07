@@ -55,93 +55,99 @@ public class ChampionshipDataParser {
     @Inject
     GamePenaltiesDAO gamePenaltiesDAO;
 
-    private List<URL> generateUrlArray()
-    {
-        List<URL> jsonFiles = new ArrayList<URL>();
-
-
-
-        jsonFiles.add(0, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols0.json"));
-        jsonFiles.add(1, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols1.json"));
-        jsonFiles.add(2, ChampionshipDataParser.class.getResource("/championship-data/JSONFirstRound/futbols2.json"));
-
-        jsonFiles.add(3, ChampionshipDataParser.class.getResource("/championship-data/JSONSecondRound/futbols0.json"));
-        jsonFiles.add(4, ChampionshipDataParser.class.getResource("/championship-data/JSONSecondRound/futbols1.json"));
-        jsonFiles.add(5, ChampionshipDataParser.class.getResource("/championship-data/JSONSecondRound/futbols2.json"));
-
-        return jsonFiles;
-    }
-
-    public void parseJsonFile()
+    public int parseJsonFile()
     {
         String line;
         Integer gameRound = 1;
         Integer gameRoundSeq = 1;
         GameEntity gameEntity = null;
+        int filesLoaded = 0;
 
         try {
-            // Iterate over all championship data json files
-            for (URL jsonFileUrl : generateUrlArray()) {
 
-                String jsonText = "";
+            File championshipDataFolder = new File(ChampionshipDataParser.class
+                    .getResource("/championship-data")
+                    .getPath());
 
-                System.out.println("url = " + jsonFileUrl);
-                System.out.println("jsonText = " + jsonText);
+            System.out.println(championshipDataFolder.toString());
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        new FileInputStream(jsonFileUrl.getPath()), "Cp1252"));
+            for (File roundDataFolder : championshipDataFolder.listFiles())
+            {
+                System.out.println(roundDataFolder.getName());
+                for (String roundGameFileName : roundDataFolder.list()) {
+                    File roundGame = new File(roundGameFileName);
+                    System.out.println(roundGame.toString());
 
-                System.out.println("jsonText = " + jsonText);
+                    String sourceFile = roundDataFolder.getName() + '/' + roundGame.getName();
+                    if (gameDAO.checkSourceFileLoaded(sourceFile)) {
+                        System.out.println("Fails " + sourceFile + " jau ir ielādēts!");
+                        continue;
+                    }
 
-                while ((line = reader.readLine()) != null) {
-                    jsonText += line;
-                }
+                    filesLoaded++;
+                    String jsonText = "";
 
-                System.out.println("jsonText = " + jsonText);
+                    // /championship-data/JSONXXXXRound/futbolsXX.json
+                    URL fileResource = ChampionshipDataParser.class.getResource('/' + championshipDataFolder.getName() + '/' + sourceFile);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(
+                            new FileInputStream(fileResource.getPath()), "Cp1252"));
 
-                System.out.println(jsonText);
-                JSONObject obj = new JSONObject(jsonText);
+                    System.out.println("jsonText = " + jsonText);
 
-                JSONObject game = obj.getJSONObject("Spele");
-                System.out.println("Speles informacija");
-                System.out.println("        Speles datums: " + game.getString("Laiks"));
-                System.out.println("        Speles vieta: " + game.getString("Vieta"));
-                System.out.println("        Skatitaju skaits: " + game.getString("Skatitaji"));
+                    while ((line = reader.readLine()) != null) {
+                        jsonText += line;
+                    }
 
-                gameEntity = new GameEntity();
+                    System.out.println("jsonText = " + jsonText);
 
-                try {
-                    DateFormat df = new SimpleDateFormat("YYYY/MM/DD");
-                    gameEntity.setGameDate(df.parse(game.getString("Laiks")));
-                    gameEntity.setAttendees(Integer.valueOf(game.getString("Skatitaji")));
-                    gameEntity.setPlace(game.getString("Vieta"));
-                    gameEntity.setGameSeq(gameRoundSeq);
-                    gameEntity.setGameRound(gameRound);
-                    gameDAO.save(gameEntity);
-                } catch (Exception e) {
-                    System.out.println("[ERROR] Kļūda, veidojot spēles ierakstu");
-                    e.printStackTrace();
-                }
+                    System.out.println(jsonText);
+                    JSONObject obj = new JSONObject(jsonText);
 
-                // Tiesnešu informācija
-                JSONArray linesmen = game.getJSONArray("T");
-                JSONObject referee = game.getJSONObject("VT");
-                saveRefereeData(linesmen, referee, gameEntity);
+                    JSONObject game = obj.getJSONObject("Spele");
+                    System.out.println("Speles informacija");
+                    System.out.println("        Speles datums: " + game.getString("Laiks"));
+                    System.out.println("        Speles vieta: " + game.getString("Vieta"));
+                    System.out.println("        Skatitaju skaits: " + game.getString("Skatitaji"));
 
-                JSONArray team = game.getJSONArray("Komanda");
-                saveTeamData(team, gameEntity);
+                    gameEntity = new GameEntity();
 
-                if(gameRoundSeq == 3) {
-                    gameRound++;
-                    gameRoundSeq = 1;
-                } else {
-                    gameRoundSeq++;
+                    try {
+                        DateFormat df = new SimpleDateFormat("YYYY/MM/DD");
+                        gameEntity.setGameDate(df.parse(game.getString("Laiks")));
+                        gameEntity.setAttendees(Integer.valueOf(game.getString("Skatitaji")));
+                        gameEntity.setPlace(game.getString("Vieta"));
+                        gameEntity.setGameSeq(gameRoundSeq);
+                        gameEntity.setGameRound(gameRound);
+                        gameEntity.setSourceFile(sourceFile);
+                        gameDAO.save(gameEntity);
+                    } catch (Exception e) {
+                        System.out.println("[ERROR] Kļūda, veidojot spēles ierakstu");
+                        e.printStackTrace();
+                    }
+
+                    // Tiesnešu informācija
+                    JSONArray linesmen = game.getJSONArray("T");
+                    JSONObject referee = game.getJSONObject("VT");
+                    saveRefereeData(linesmen, referee, gameEntity);
+
+                    JSONArray team = game.getJSONArray("Komanda");
+                    saveTeamData(team, gameEntity);
+
+                    if(gameRoundSeq == 3) {
+                        gameRound++;
+                        gameRoundSeq = 1;
+                    } else {
+                        gameRoundSeq++;
+                    }
+
                 }
             }
         } catch (Exception e) {
             System.out.println("[ERROR] Kļūda, apstrādājot JSON datus");
             e.printStackTrace();
         }
+
+        return filesLoaded;
     }
 
     public static Integer nvl(Integer value, Integer alternateValue) {
@@ -681,6 +687,18 @@ public class ChampionshipDataParser {
 
         // Aprēķina, kurš uzvarējis un cik vārti ir ielaisti (un citu informāciju)
         calculateTeamStatistics(teamList, gameEntity);
+    }
 
+    public void deleteAll() {
+        gamePenaltiesDAO.deleteAll();
+        gameChangesDAO.deleteAll();
+        goalAssistsDAO.deleteAll();
+        gameGoalsDAO.deleteAll();
+        playersOnFieldDAO.deleteAll();
+        gameRefereesLinkDAO.deleteAll();
+        gameRefereesDAO.deleteAll();
+        gameDAO.deleteAll();
+        teamPlayersDAO.deleteAll();
+        teamDAO.deleteAll();
     }
 }

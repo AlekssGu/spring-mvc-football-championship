@@ -1,12 +1,11 @@
 package lv.ag12098.controller;
 
 import lv.ag12098.ChampionshipDataParser;
+import lv.ag12098.dao.GameDAO;
 import lv.ag12098.dao.GameRefereesDAO;
 import lv.ag12098.dao.TeamDAO;
 import lv.ag12098.dao.TeamPlayersDAO;
 import lv.ag12098.entity.*;
-import org.hibernate.pretty.MessageHelper;
-import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,6 +38,9 @@ public class HomeController {
 
     @Inject
     GameRefereesDAO gameRefereesDAO;
+
+    @Inject
+    GameDAO gameDAO;
 
     private static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -175,13 +174,6 @@ public class HomeController {
             model.addAttribute("allTeamPlayers",allPlayers);
             model.addAttribute("goBack", refererURI);
 
-            // @TODO:
-            // nospēlēto spēļu skaitu (nospēlēto spēļu skaits pamatsastāvā)
-            // nospēlētās minūtes
-            // iesisto vārtu
-            // rezultatīvo piespēļu skaits
-            // saņemtās dzeltenās kartītes
-            // saņemtās sarkanās kartītes
         } catch (Exception e) {
             e.printStackTrace();
             return "static/error404";
@@ -192,7 +184,7 @@ public class HomeController {
     @RequestMapping(value = "/load-data", method = RequestMethod.GET)
     public String loadJson(Model model, RedirectAttributes redirectAttributes) {
 
-        champ.parseJsonFile();
+        int countLoaded = champ.parseJsonFile();
 
         List<TeamEntity> teamsList = teamDAO.findAll();
         List<BestPlayersEntity> playerList = teamPlayersDAO.getFirstBest(10);
@@ -209,12 +201,30 @@ public class HomeController {
         model.addAttribute("referees", refereeList);
         model.addAttribute("allPlayers", allTeamPlayers);
 
-        if (teamsList.size() > 0)
+        if (countLoaded > 0)
             redirectAttributes.addFlashAttribute("successMsg", "Dati veiksmīgi ielādēti sistēmā!");
         else
-            redirectAttributes.addFlashAttribute("errorMsg", "Kļūda! Dati netika ieladēti sistēmā!");
+            redirectAttributes.addFlashAttribute("infoMsg", "Dati netika ielādēti, jo visi faili jau ir apstrādāti!");
 
         //atgriež sakuma lapu
         return "redirect:/championship-table";
+    }
+
+    @RequestMapping(value = "/files-loaded", method = RequestMethod.GET)
+    public String filesLoaded(Model model) {
+
+        List<GameEntity> filesLoaded = gameDAO.findAll();
+        model.addAttribute("filesLoaded", filesLoaded);
+
+        return "static/files-loaded";
+    }
+
+    @RequestMapping(value = "/delete-all", method = RequestMethod.GET)
+    public String deleteAll(Model model, RedirectAttributes redirectAttributes) {
+
+        champ.deleteAll();
+        redirectAttributes.addFlashAttribute("successMsg", "Dati veiksmīgi dzēsti!");
+
+        return "redirect:/files-loaded";
     }
 }
