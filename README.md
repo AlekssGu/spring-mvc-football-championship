@@ -2,6 +2,9 @@
 
 [![Spring MVC](http://www.javapointer.com/wp-content/uploads/2016/05/spring.png?fit=225%2C150)](https://spring.io)
 
+Jaunākā un, visticamāk, pēdējā sistēmas versija - [v.0.1-alpha][release].
+Darbs nodots pasniedzējam.
+
 "Lielā Futbola Līga" ir Latvijas Universitātes Datorikas fakultātē uzdots 2. praktiskais darbs kursā "Modernās programmēšanas tehnoloģijas" (kursa pasniedzējs - Edgars Celms).
 
 Praktiskā darba izveidei izvēlējos "Java Spring MVC" tehnoloģiju, jo nekad iepriekš nebiju darbojies ne ar Java, ne ar Spring MVC. Lai paplašinātu savas zināšanas, tika izvēlēta tieši šī tehnoloģija.
@@ -27,7 +30,7 @@ Lai palaistu projektu, nepieciešams uzstādīt PostgreSQL
 4. Atvērt projektu Intellij IDEA (File->Open)
 5. Failā `applicationContext.xml` nomainīt datubāzes paroli uz jūsu Postgres lietotāja paroli
 6. Palaist projektu (`Run jetty:run`)
-7. Pārlūkprogrammā atvērt [http://localhost:8080][localhost]
+7. Pārlūkprogrammā atvērt [http://localhost:8080][localhost] 
 
 Kods un uzdevums ir [pieejams visiem][football] interesentiem.
 Ja jums interesē izveidot savu uzdevuma risinājumu, pievienoju arī uzdevuma [nosacījumus][doc] un [čempionāta datus][data].
@@ -36,3 +39,4 @@ Ja jums interesē izveidot savu uzdevuma risinājumu, pievienoju arī uzdevuma [
    [football]: <https://github.com/AlekssGu/spring-mvc-football-championship>
    [doc]: <https://github.com/AlekssGu/spring-mvc-football-championship/blob/master/uzdevums.pdf>
    [data]: <https://github.com/AlekssGu/spring-mvc-football-championship/blob/master/dati.zip>
+   [release]: <https://github.com/AlekssGu/spring-mvc-football-championship/releases/tag/v.0.1-alpha>

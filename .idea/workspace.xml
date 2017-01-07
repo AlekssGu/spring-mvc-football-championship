@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba220f80-4508-47fc-9ed6-b2051f7862c2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/FirstRound/futbols0.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/FirstRound/futbols1.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/FirstRound/futbols2.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/SecondRound/futbols0.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/SecondRound/futbols1.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/SecondRound/futbols2.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/controller/HomeController.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/controller/HomeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/AbstractBaseDAO.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/AbstractBaseDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameDAO.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameRefereesDAO.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameRefereesDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameRefereesDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameRefereesDAOImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/BestRefereesEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/BestRefereesEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GameEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GameEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/static/championship-table.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/static/championship-table.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/footer.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/navbar.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/navbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lv.ag12098.iml" afterPath="$PROJECT_DIR$/lv.ag12098.iml" />
     </list>
     <ignored path="SpringMVC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,16 +31,6 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="CARS_DB- cars_db@localhost" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -77,7 +51,7 @@
       <file leaf-file-name="ChampionshipDataParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
+            <state relative-caret-position="170">
               <caret line="83" column="24" lean-forward="false" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -88,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="navbar.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="navbar.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/navbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="28" column="17" lean-forward="false" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+            <state relative-caret-position="195">
+              <caret line="21" column="74" lean-forward="false" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -131,9 +105,58 @@
       <file leaf-file-name="HomeController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/controller/HomeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="228" column="5" lean-forward="false" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
+            <state relative-caret-position="-2137">
+              <caret line="36" column="19" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Persistence/JavaeeElement:/b34731ad/sessionFactory/lv.ag12098/hibernate/Hibernate/PersistenceModel" pinned="false" current-in-tab="false">
+        <entry file="uml://Persistence/JavaeeElement:/b34731ad/sessionFactory/lv.ag12098/hibernate/Hibernate/PersistenceModel">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>Persistence</ID>
+              <OriginalElement>JavaeeElement:/b34731ad/sessionFactory/lv.ag12098/hibernate/Hibernate/PersistenceModel</OriginalElement>
+              <nodes>
+                <node x="873.4747653621391" y="600.4954843279617">BestRefereesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestRefereesEntity.java</node>
+                <node x="877.9603329201343" y="742.9992916592881">BestPlayersEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestPlayersEntity.java</node>
+                <node x="-118.4930051354701" y="484.9900832300334">GameGoalsEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameGoalsEntity.java</node>
+                <node x="877.9891978041437" y="233.01717726226315">GameRefereesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameRefereesEntity.java</node>
+                <node x="599.9645829644057" y="240.52895342659826">GameRefereesLinkEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameRefereesLinkEntity.java</node>
+                <node x="528.4825571099698" y="-63.97751018239771">PlayersOnFieldEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/PlayersOnFieldEntity.java</node>
+                <node x="-117.47069240304572" y="717.5007968833007">GoalAssistsEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GoalAssistsEntity.java</node>
+                <node x="211.0150522401275" y="-90.97591641579595">TeamPlayersEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/TeamPlayersEntity.java</node>
+                <node x="-97.49424473171601" y="263.01540641048337">GameChangesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameChangesEntity.java</node>
+                <node x="198.5020364795467" y="521.0001770851779">GamePenaltiesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GamePenaltiesEntity.java</node>
+                <node x="-183.96812466796507" y="-95.99433327430492">TeamEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/TeamEntity.java</node>
+                <node x="173.98972905967764" y="158.99061448556756">GameEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameEntity.java</node>
+              </nodes>
+              <notes />
+              <edges />
+              <settings layout="Hierarchic Group" zoom="0.6667060212514759" x="103.97874977864348" y="72.97874977864348" />
+              <SelectedNodes>
+                <node>BestRefereesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestRefereesEntity.java</node>
+                <node>BestPlayersEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestPlayersEntity.java</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Properties</Category>
+                <Category>Embeddables</Category>
+                <Category>Superclasses</Category>
+              </Categories>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="85">
+                <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -153,16 +176,6 @@
                 <marker date="1483796219444" expanded="true" signature="5119:5606" ph="select coale... game" />
                 <marker date="1483796219444" expanded="true" signature="5119:5608" ph="select get_p... " />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TeamPlayersDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/dao/TeamPlayersDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="18" column="11" lean-forward="false" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -241,7 +254,6 @@
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/entity/GamePenaltiesEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GamePenaltiesDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GamePenaltiesDAOImpl.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/alert.html" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/dto/TeamDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/championship-data/FirstRound/futbols2.json" />
@@ -278,10 +290,11 @@
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/dao/GameRefereesDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/footer.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/static/championship-table.html" />
-        <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/static/description.html" />
         <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/controller/HomeController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/navbar.html" />
+        <option value="$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -715,6 +728,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spring-mvc-football-championship" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spring-mvc-football-championship" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ag12098" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1314,12 +1361,12 @@
       <workItem from="1483135803948" duration="28946000" />
       <workItem from="1483192692619" duration="64000" />
       <workItem from="1483273899005" duration="40777000" />
-      <workItem from="1483361204613" duration="66756000" />
+      <workItem from="1483361204613" duration="72831000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253753000" />
+    <option name="totallyTimeSpent" value="259828000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1332,7 +1379,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1341,7 +1388,7 @@
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17447917" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.04625" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24935733" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1355,7 +1402,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44367176" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.260625" sideWeight="0.51153326" order="1" side_tool="false" content_ui="combo" x="532" y="189" width="306" height="393" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.260625" sideWeight="0.14579439" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.260625" sideWeight="0.8542056" order="1" side_tool="false" content_ui="combo" x="532" y="189" width="306" height="393" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3285528" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1367,7 +1415,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17270789" sideWeight="0.48846677" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962447" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1555,21 +1602,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/dto/PlayersOnFieldDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="69" column="40" lean-forward="false" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../lapsa/src/main/java/lv/autentica/lapis/dao/LapActivitiesDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../lapsa/src/main/java/lv/autentica/lapis/dao/LapActivitiesDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-510">
@@ -1996,18 +2028,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="83" column="24" lean-forward="false" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#saveGameChangesData#0;class#ChampionshipDataParser#0" expanded="false" />
-            <element signature="method#saveTeamPenaltyData#0;class#ChampionshipDataParser#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/static/championship-table.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
@@ -2032,19 +2052,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/controller/HomeController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/navbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="228" column="5" lean-forward="false" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
+        <state relative-caret-position="195">
+          <caret line="21" column="74" lean-forward="false" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/templates/fragments/navbar.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/ChampionshipDataParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="28" column="17" lean-forward="false" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+        <state relative-caret-position="170">
+          <caret line="83" column="24" lean-forward="false" selection-start-line="83" selection-start-column="24" selection-end-line="83" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#saveGameChangesData#0;class#ChampionshipDataParser#0" expanded="false" />
+            <element signature="method#saveTeamPenaltyData#0;class#ChampionshipDataParser#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lv/ag12098/controller/HomeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2137">
+          <caret line="36" column="19" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://Persistence/JavaeeElement:/b34731ad/sessionFactory/lv.ag12098/hibernate/Hibernate/PersistenceModel">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>Persistence</ID>
+          <OriginalElement>JavaeeElement:/b34731ad/sessionFactory/lv.ag12098/hibernate/Hibernate/PersistenceModel</OriginalElement>
+          <nodes>
+            <node x="873.4747653621391" y="600.4954843279617">BestRefereesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestRefereesEntity.java</node>
+            <node x="877.9603329201343" y="742.9992916592881">BestPlayersEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestPlayersEntity.java</node>
+            <node x="-118.4930051354701" y="484.9900832300334">GameGoalsEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameGoalsEntity.java</node>
+            <node x="877.9891978041437" y="233.01717726226315">GameRefereesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameRefereesEntity.java</node>
+            <node x="599.9645829644057" y="240.52895342659826">GameRefereesLinkEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameRefereesLinkEntity.java</node>
+            <node x="528.4825571099698" y="-63.97751018239771">PlayersOnFieldEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/PlayersOnFieldEntity.java</node>
+            <node x="-117.47069240304572" y="717.5007968833007">GoalAssistsEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GoalAssistsEntity.java</node>
+            <node x="211.0150522401275" y="-90.97591641579595">TeamPlayersEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/TeamPlayersEntity.java</node>
+            <node x="-97.49424473171601" y="263.01540641048337">GameChangesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameChangesEntity.java</node>
+            <node x="198.5020364795467" y="521.0001770851779">GamePenaltiesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GamePenaltiesEntity.java</node>
+            <node x="-183.96812466796507" y="-95.99433327430492">TeamEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/TeamEntity.java</node>
+            <node x="173.98972905967764" y="158.99061448556756">GameEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/GameEntity.java</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.6667060212514759" x="103.97874977864348" y="72.97874977864348" />
+          <SelectedNodes>
+            <node>BestRefereesEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestRefereesEntity.java</node>
+            <node>BestPlayersEntity#file://C:/SVN/java_projects/spring-mvc-football-championship/src/main/java/lv/ag12098/entity/BestPlayersEntity.java</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Properties</Category>
+            <Category>Embeddables</Category>
+            <Category>Superclasses</Category>
+          </Categories>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="85">
+            <caret line="5" column="26" lean-forward="false" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -2102,7 +2179,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Spring|lv.ag12098</last-edited>
+          <last-edited>lv.ag12098</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
